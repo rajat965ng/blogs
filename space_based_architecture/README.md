@@ -6,7 +6,7 @@
 - The term *Space* actually refer to the *Tuple Space* from computer science which means multiple parallel processors with shared memory. Tuples are terms with zero or more arguments and a key.
 - All transactional data are cached in-memory.
 
-![](.images/space_based.png)
+![architecture diagram](.images/space_based.png)
 
 ## Explanation
 - The architecture diagram showcase a couple of microservices (customer and payments) having multiple deployed instances.
