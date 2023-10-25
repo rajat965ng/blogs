@@ -1,5 +1,7 @@
 # TOGAF in nutshell
 
+![](.images/blogs-togaf-in-nutshell-1.png)
+
 ## Overview
 - TOGAF known as The Open Group Architecture framework that helps define business goals and align them with architecture objectives around enterprise software development.
 - It's an initiative based process.
@@ -10,6 +12,8 @@
   - Architecture Content Framework
   - Enterprise Continuum and Reference Models
   - Architecture Capability Framework
+
+![](.images/blogs-togaf-in-nutshell-2.png)
 
 ## Architecture Development Model (ADM)
 - It is the core engine of TOGAF.
