@@ -6,12 +6,12 @@
 - TOGAF known as The Open Group Architecture framework that helps define business goals and align them with architecture objectives around enterprise software development.
 - It's an initiative based process.
 - The TOGAF consists of 5 key components
-  - Business Drivers and Goals
-  - Architecture Development Methods
-  - Business Capabilities
-  - Architecture Content Framework
-  - Enterprise Continuum and Reference Models
-  - Architecture Capability Framework
+  - Business Drivers and Goals: These set the direction for architecture development by defining the overarching objectives of the enterprise.
+  - Architecture Development Methods: These are the prescribed methods and techniques used to develop and implement the architecture.
+  - Business Capabilities: Understanding the capabilities required by the business to meet its goals and objectives.
+  - Architecture Content Framework: A structured approach for documenting and managing reusable architecture artifacts.
+  - Enterprise Continuum and Reference Models: These provide feedback loop to check the fulfillment of business capabilities.
+  - Architecture Capability Framework: This defines the project management capabilities required for successful architectural practice.
 
 ![](.images/blogs-togaf-in-nutshell-2.png)
 
