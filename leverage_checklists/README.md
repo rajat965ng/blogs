@@ -34,7 +34,7 @@
 | &#9744; | Database update and database migration script   |
 | &#9744; | Specific error prone situation                  |
 
-- It is fine to add obvious steps in checklist that may subject to get skip occasionally
-- Try to keep checklist as compact as possible
+- It is fine to add obvious steps in checklist that may subject to get skip occasionally.
+- Try to keep checklist as compact as possible.
 - As a software architect don't create checklist by yourself. Create a democratic process and involve Development teams to achieve it. Collaborate with development team.
-- Don't go overboard and add every process 
+- Don't go overboard and add every process. 
