@@ -4,7 +4,7 @@
 - Effective checklists are the ones where it is known which process is to be included and which one is to be parked outside.
 - The processes that are found to have a procedural flow of dependent tasks doesn't require checklists.
 - Also, the process that are extremely simple and can be executed without error also doesn't require checklists.
-- Example: Process to create database tables. These are just series of steps. They are not qualified to be checklist.
+- Example: Process to create database tables. These are just series of steps and not a checklist. They are not qualified to be checklist.
 
 | done    | task description                                  |
 |---------|---------------------------------------------------|
