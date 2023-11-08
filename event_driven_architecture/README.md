@@ -5,7 +5,7 @@
 - Things that are hard to manage in EDA are complexity and user paths.
 - EDA is built on top of event channels. 
 
-[Event Driven Architecture](.images/blogs-event_driven_architecture.drawio.png)
+![Event Driven Architecture](.images/blogs-event_driven_architecture.drawio.png)
 
 - Components of EDA
   - Events: Comes either from internal or external system.
