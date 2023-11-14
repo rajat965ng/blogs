@@ -1,6 +1,6 @@
 # Service Oriented Architecture Vs Service Based Architecture
 
-![soa_vs_SBA](.images/blogs-soa_vs_SBA.drawio.png)
+![soa_vs_SBA](.images/blogs-soa_vs_sbd.drawio.png)
 
 # Service Oriented Architecture (SOA)
 ## Introduction 
