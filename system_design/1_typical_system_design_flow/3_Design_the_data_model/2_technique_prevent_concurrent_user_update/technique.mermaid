@@ -1,0 +1,62 @@
+sequenceDiagram
+    participant UI as UI
+    participant Backend as Backend
+    participant Database as DB
+    participant User as User
+
+    rect rgb(176,224,230, .1)
+        User->UI: Clicks Edit Button
+        UI->Backend: PUT Request (Start Edit)
+        Backend->DB: SQL Query (Check Lock)
+        DB->Backend: Lock Status
+        alt Configuration Locked
+            Backend->UI: 200 Success (Can't Edit)
+            UI->User: Display Notification
+        else Configuration Available
+            Backend->DB: SQL Query (Lock Configuration)
+            DB->Backend: Lock Successful
+            Backend->UI: 200 Success (Can Edit)
+            UI->User: Open Edit Page
+        end
+    end
+
+    rect rgb(176,224,230, .1)
+        User->UI: Makes Edits
+        UI->Backend: PUT Request (Save Edits)
+        Backend->DB: SQL Query (Update Configuration)
+        DB->Backend: Update Successful
+        Backend->UI: 200 Success (Edits Saved)
+        UI->User: Display Success Notification
+    end
+
+    rect rgb(176,224,230, .1)
+        User->UI: Clicks Edit Button (Concurrent)
+        UI->Backend: PUT Request (Start Edit)
+        Backend->DB: SQL Query (Check Lock)
+        DB->Backend: Lock Status
+        alt Configuration Locked
+            Backend->UI: 200 Success (Can't Edit)
+            UI->User: Display Notification
+        else Configuration Available
+            Backend->DB: SQL Query (Lock Configuration)
+            DB->Backend: Lock Successful
+            Backend->UI: 200 Success (Can Edit)
+            UI->User: Open Edit Page
+        end
+    end
+
+    rect rgb(176,224,230, .1)
+        User2->UI: Clicks Edit Button (Concurrent)
+        UI->Backend2: PUT Request (Start Edit)
+        Backend2->DB: SQL Query (Check Lock)
+        DB->Backend2: Lock Status
+        alt Configuration Locked
+            Backend2->UI: 200 Success (Can't Edit)
+            UI->User2: Display Notification
+        else Configuration Available
+            Backend2->DB: SQL Query (Lock Configuration)
+            DB->Backend2: Lock Successful
+            Backend2->UI: 200 Success (Can Edit)
+            UI->User2: Open Edit Page
+        end
+    end

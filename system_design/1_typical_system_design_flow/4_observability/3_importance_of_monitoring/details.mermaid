@@ -1,0 +1,11 @@
+graph TD;
+    subgraph "Monitoring Setup"
+        A[Monitoring] --> B[Identify bugs, degradations, unexpected events]
+        A --> C[System's ability to satisfy requirements]
+        A --> D[Categorize failures by urgency]
+        D --> E[High-urgency failures]
+        D --> F[Low-urgency failures]
+        A --> G[Service dependencies]
+        G --> H[Investigate possible degradations]
+        H --> I[Answer questions from dependent services]
+    end

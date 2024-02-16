@@ -1,0 +1,42 @@
+sequenceDiagram
+    participant UI as UI
+    participant Backend as Backend
+    participant Database as DB
+    participant User_Alice as Alice
+    participant User_Bob as Bob
+
+    User_Alice->>UI: Clicks on Edit button
+    UI->>Backend: Send PUT request with Alice's credentials
+    Backend->>DB: Retrieve unix_locked time
+    DB->>Backend: Send unix_locked time to Backend
+    Backend->>DB: Update row to lock configuration
+    alt Configuration locked
+        DB->>Backend: Return success response
+        Backend->>UI: Return success response to UI
+    else Configuration not locked
+        DB->>Backend: Return failure response
+        Backend->>UI: Return failure response to UI
+    end
+
+    User_Bob->>UI: Clicks on Edit button
+    UI->>Backend: Send PUT request with Bob's credentials
+    Backend->>DB: Retrieve unix_locked time
+    DB->>Backend: Send unix_locked time to Backend
+    Backend->>DB: Attempt to update row to lock configuration
+    DB->>Backend: Return failure response (row already locked)
+    Backend->>UI: Return failure response to UI with lock details
+    UI->>User_Bob: Display notification with remaining time and lock details
+
+    User_Alice->>UI: Makes edits within time limit
+    UI->>Backend: Send PUT request with Alice's edited values
+    Backend->>DB: Update row with edited values and unlock configuration
+
+    User_Bob->>UI: Attempts to edit after Alice saves changes
+    UI->>Backend: Send PUT request with Bob's credentials
+    Backend->>DB: Retrieve unix_locked time
+    DB->>Backend: Send unix_locked time to Backend
+    Backend->>DB: Attempt to update row to lock configuration
+    DB->>Backend: Return success response
+    Backend->>UI: Return success response to UI
+
+    UI->>User_Bob: Enable Edit button

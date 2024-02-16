@@ -1,0 +1,32 @@
+graph LR
+    subgraph Team Setup
+        A[Develop & Maintain Service] --> B[Set up On-call Schedule]
+    end
+
+    subgraph Runbook Preparation
+        B --> C[Prepare Runbook]
+        C --> D[Identify Copy-Paste Commands]
+        C --> E[Display Metrics on Dashboard]
+    end
+
+    subgraph SRE Team
+        F[Site Reliability Engineering SRE Team] --> G[Define SRE Criteria]
+    end
+
+    subgraph Post-Outage Actions
+        H[Resolve Outage] --> I[Author Postmortem]
+        I --> J[Identify What Went Wrong]
+        J --> K[Automate Mitigation]
+    end
+
+    style A fill:#F9EBEA
+    style B fill:#F9EBEA
+    style C fill:#F9EBEA
+    style D fill:#F9EBEA
+    style E fill:#F9EBEA
+    style F fill:#D5DBDB
+    style G fill:#D5DBDB
+    style H fill:#F9E79F
+    style I fill:#F9E79F
+    style J fill:#F9E79F
+    style K fill:#F9E79F

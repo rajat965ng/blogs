@@ -1,0 +1,69 @@
+graph LR;
+
+    Observability --> Logging;
+    Observability --> Golden_Signals;
+    Observability --> Request_Level_Logging;
+
+    Logging --> General_Considerations;
+    Logging --> Common_Logs;
+
+    General_Considerations --> Structured_Logs;
+    General_Considerations --> Unique_Identifier;
+    General_Considerations --> Small_Entries;
+    General_Considerations --> Timestamps;
+    General_Considerations --> Categorize_Logs;
+    General_Considerations --> Avoid_Sensitive_Info;
+
+    Common_Logs --> Host_Logging;
+    Common_Logs --> Request_Logging;
+
+    Host_Logging --> CPU_Memory_Utilization;
+    Host_Logging --> Network_IO;
+
+    Request_Logging --> Latency;
+    Request_Logging --> Who_When;
+    Request_Logging --> Function_Details;
+    Request_Logging --> Request_Details;
+    Request_Logging --> Return_Details;
+
+    Golden_Signals --> Latency;
+    Golden_Signals --> Traffic;
+    Golden_Signals --> Errors;
+    Golden_Signals --> Saturation;
+
+    Request_Level_Logging --> User_Experiences;
+    Request_Level_Logging --> System_Events;
+
+    User_Experiences --> Customized_Monitoring;
+    System_Events --> Silent_Failures;
+
+    Customized_Monitoring --> Dashboards;
+    Customized_Monitoring --> Alerts;
+
+    Silent_Failures --> Logging_Monitoring_Improvements;
+
+    Observability[Observability]
+    Logging[Logging]
+    Golden_Signals[Golden Signals]
+    Request_Level_Logging[Request-Level Logging]
+    General_Considerations[General Considerations]
+    Common_Logs[Common Logs]
+    Host_Logging[Host Logging]
+    Request_Logging_Details[Request-Level Logging Details]
+    CPU_Memory_Utilization[CPU and Memory Utilization]
+    Network_IO[Network I/O]
+    Latency[Latency]
+    Who_When[Who and When]
+    Function_Details[Function Details]
+    Request_Details[Request Details]
+    Return_Details[Return Details]
+    Traffic[Traffic]
+    Errors[Errors]
+    Saturation[Saturation]
+    User_Experiences[User Experiences]
+    System_Events[System Events]
+    Customized_Monitoring[Customized Monitoring]
+    Silent_Failures[Silent Failures]
+    Dashboards[Dashboards]
+    Alerts[Alerts]
+    Logging_Monitoring_Improvements[Logging and Monitoring Improvements]

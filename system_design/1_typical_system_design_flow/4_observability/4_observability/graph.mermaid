@@ -1,0 +1,79 @@
+graph TB
+    subgraph "Observability"
+        A[Observability]
+        A --> B[Logging]
+        A --> C[Metrics]
+        A --> D[Tracing]
+    end
+
+    subgraph "Logging"
+        B --> BA[Structured Logging]
+        B --> BB[Log Entry Considerations]
+        B --> BC[Common Logs]
+    end
+
+    subgraph "Metrics"
+        C --> CA[Golden Signals]
+        C --> CB[Instrumentation]
+    end
+
+    subgraph "Tracing"
+        D --> DA[Distributed Tracing]
+        D --> DB[Trace Context]
+    end
+
+    BA --> BA1[Easy to Parse]
+    BA --> BA2[Unique Identifier]
+    BA --> BA3[Small and Readable]
+    BA --> BA4[Consistent Timestamps]
+    BA --> BA5[Categorization]
+    BA --> BA6[Protection of Sensitive Information]
+
+    BB --> BB1[General Considerations]
+
+    BC --> BC1[Host Logging]
+    BC --> BC2[Request-Level Logging]
+
+    CA --> CA1[Latency]
+    CA --> CA2[Traffic]
+    CA --> CA3[Errors]
+    CA --> CA4[Saturation]
+
+    CB --> CB1[Metrics]
+    CB --> CB2[Dashboards]
+    CB --> CB3[Alerts]
+
+    DB --> DB1[Request Tracing]
+    DB --> DB2[Service Dependency Mapping]
+
+    DA --> DA1[Data Collection]
+    DA --> DA2[Root Cause Analysis]
+
+    subgraph "Customized Monitoring"
+        E[Customized Monitoring]
+        E --> EA[User Experiences]
+        E --> EB[System Events]
+        EA --> EA1[Error Monitoring]
+        EA --> EA2[Performance Monitoring]
+        EA --> EA3[User Interaction Monitoring]
+        EB --> EB1[Cache Monitoring]
+        EB --> EB2[Functional and Non-functional Requirements]
+    end
+
+    subgraph "Access and Permissions"
+        F[Access and Permissions]
+        F --> FA[User Access to Monitoring]
+        F --> FB[Custom Monitoring Tools]
+    end
+
+    subgraph "Addressing Silent Failures"
+        G[Addressing Silent Failures]
+        G --> GA[Debugging Application Code]
+        G --> GB[Dependency Monitoring]
+    end
+
+    subgraph "Batch and Streaming Audit Jobs"
+        H[Audit Jobs]
+        H --> HA[Data Validation]
+        HA --> HA1[Data Integrity Monitoring]
+    end

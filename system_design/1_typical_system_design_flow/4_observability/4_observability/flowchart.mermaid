@@ -1,0 +1,44 @@
+graph LR
+    observability[Observability]
+    general_considerations[General Considerations in Logging]
+    golden_signals[Golden Signals]
+    request_logging[Request-Level Logging]
+    custom_monitoring[Customized Monitoring]
+    silent_failures[Silent Failures]
+    data_validation[Data Validation]
+
+    observability --> general_considerations
+    observability --> golden_signals
+    observability --> request_logging
+    observability --> custom_monitoring
+    observability --> silent_failures
+    observability --> data_validation
+
+    general_considerations --> structured_logs[Structured Logs]
+    general_considerations --> unique_identifier[Unique Identifier]
+    general_considerations --> small_entries[Small Entries]
+    general_considerations --> timestamps[Timestamps]
+    general_considerations --> categorize_logs[Categorize Logs]
+    general_considerations --> avoid_sensitive_info[Avoid Sensitive Info]
+
+    request_logging --> host_logging[Host Logging]
+    request_logging --> request_details[Request Details]
+
+    host_logging --> cpu_memory_utilization[CPU & Memory Utilization]
+    host_logging --> network_io[Network I/O]
+
+    request_details --> latency[Latency]
+    request_details --> who_when[Who & When]
+    request_details --> function_details[Function Details]
+    request_details --> path_parameters_headers_body[Path, Parameters, Headers, Body]
+    request_details --> return_details[Return Details]
+
+    custom_monitoring --> user_experiences[User Experiences]
+    custom_monitoring --> system_events[System Events]
+    custom_monitoring --> batch_streaming_audit[Batch & Streaming Audit Jobs]
+
+    user_experiences --> focus_5xx_errors[Focus on 5xx Errors]
+    user_experiences --> cache_logs[Cache Logs]
+    user_experiences --> dashboards[Dashboards for Users]
+
+    system_events --> monitoring_tools[Monitoring Tools]
