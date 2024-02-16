@@ -1,0 +1,36 @@
+flowchart LR
+    A[Non-functional Requirements] --> B[Scalability]
+    A --> C[Availability]
+    A --> D[Performance / Latency / P99 / Throughput]
+    A --> E[Fault-Tolerance]
+    A --> F[Security]
+    A --> G[Privacy]
+    A --> H[Accuracy]
+    A --> I[Consistency]
+    A --> J[Cost]
+    A --> K[Complexity, Maintainability, Debuggability, Testability]
+
+    B --> B1[Adjust hardware resources easily]
+    B --> B2[Cost-efficient support for load]
+
+    C --> C1[Percentage of uptime]
+    C --> C2[Ability to accept requests and return desired response]
+
+    D --> D1[Time taken for request to return a response]
+    D --> D2[Maximum request rate - bandwidth]
+    D --> D3[Current request rate - throughput]
+
+    E --> E1[Continue operating with component failures]
+    E --> E2[Prevent permanent harm]
+
+    F --> F1[Prevent unauthorized access]
+
+    G --> G1[Access control to PII]
+
+    H --> H1[Data accuracy tradeoffs]
+
+    I --> I1[Consistency of data across nodes/machines]
+
+    J --> J1[Cost reduction through tradeoffs]
+
+    K --> K1[Difficulty in building and maintaining system]
