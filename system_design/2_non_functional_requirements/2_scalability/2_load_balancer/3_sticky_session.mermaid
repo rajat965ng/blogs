@@ -1,0 +1,16 @@
+graph TD;
+    Sticky_Sessions["Sticky Sessions"] --> Load_Balancer;
+    Load_Balancer["Load Balancer"] --> |Routes requests| Application_Servers;
+    Application_Servers["Application Servers"] --> User_Data;
+
+    subgraph "Duration-based Sticky Session"
+        Duration_Cookie["Load Balancer issues a cookie with duration"]
+        Load_Balancer --> Duration_Cookie
+        Duration_Cookie --> |Valid for a duration| Application_Servers
+    end
+
+    subgraph "Application-controlled Sticky Session"
+        Application_Cookie["Application generates a cookie"]
+        Load_Balancer --> Application_Cookie
+        Application_Cookie --> |Follows application cookie's lifetime| Application_Servers
+    end

@@ -1,0 +1,8 @@
+graph TD;
+    Load_Balancer["Load Balancer"] --> |For Scalability| Cluster_of_Servers;
+    Reverse_Proxy["Reverse Proxy"] --> |For Managing Communication| Cluster_of_Servers;
+    Reverse_Proxy --> |Intercepts and Forwards Requests| Clients;
+    Load_Balancer --> |Also provides| SSL_Termination;
+    Reverse_Proxy --> |May provide| SSL_Termination;
+    Reverse_Proxy --> |May provide| Caching;
+    Reverse_Proxy --> |May provide| Compression;

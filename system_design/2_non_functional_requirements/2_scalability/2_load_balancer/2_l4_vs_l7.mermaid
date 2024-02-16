@@ -1,0 +1,7 @@
+graph TD;
+    Level_4_Load_Balancer["Level 4 Load Balancer (TCP)"] --> |Routing decisions based on address info from first few packets in TCP stream| Load_Balancer_4;
+    Load_Balancer_4["Load Balancer 4"] --> |Forwards packets| Application_Servers;
+    Level_7_Load_Balancer["Level 7 Load Balancer (HTTP)"] --> |Routing decisions based on packet's contents| Load_Balancer_7;
+    Load_Balancer_7["Load Balancer 7"] --> |Performs load balancing/routing decisions| Application_Servers;
+    Load_Balancer_7 --> |Performs authentication| Authentication_Service;
+    Load_Balancer_7 --> |Performs TLS termination| Application_Servers;

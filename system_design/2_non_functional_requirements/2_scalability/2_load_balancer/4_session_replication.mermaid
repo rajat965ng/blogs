@@ -1,0 +1,13 @@
+graph TD;
+    Session_Replication["Session Replication"] --> Load_Balancer;
+    Load_Balancer["Load Balancer"] --> |Routes requests| Application_Servers;
+    Application_Servers["Application Servers"] --> |Write requests| Host_A;
+    Application_Servers --> |Write requests| Host_B;
+    Application_Servers --> |Write requests| Host_C;
+    Host_A --> |Replicates data| Host_B;
+    Host_B --> |Replicates data| Host_C;
+    Host_C --> |Replicates data| Host_A;
+
+    subgraph "Backup Ring"
+        Host_A --> Host_C;
+    end

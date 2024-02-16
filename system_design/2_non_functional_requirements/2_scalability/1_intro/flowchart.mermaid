@@ -1,0 +1,29 @@
+flowchart LR
+    A[Scalability] --> B[Vertical Scaling]
+    A --> C[Horizontal Scaling]
+
+    B --> B1[Upgrade hardware of a single host]
+    B --> B2[Technological limits]
+    B --> B3[Downtime required]
+
+    C --> C1[Spread processing and storage across multiple hosts]
+
+    B2 --> B21[Cost increases faster than performance]
+    B2 --> B22[Technological limitations]
+    B3 --> B31[Requires downtime]
+
+    C1 --> C11[True scalability]
+    C1 --> C12[Focus of system design interviews]
+
+    A --> D[Customer's Scalability Requirements]
+    D --> D1[Data volume in and out of system]
+    D --> D2[Read queries per second]
+    D --> D3[Data size per request]
+    D --> D4[Video views per second]
+    D --> D5[Traffic spike size]
+
+    D1 --> D11[Incoming and outgoing data volume]
+    D2 --> D21[Number of read queries]
+    D3 --> D31[Size of data in each request]
+    D4 --> D41[Number of video views]
+    D5 --> D51[Size of sudden traffic spikes]

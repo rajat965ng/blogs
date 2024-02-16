@@ -1,0 +1,23 @@
+graph LR
+    Load_Balancer[Load Balancer]
+    Hardware_Load_Balancer[Hardware Load Balancer]
+    Shared_Load_Balancer_Service[Shared Load Balancer Service]
+    Server_with_Load_Balancing_Software[Server with Load Balancing Software]
+
+    Load_Balancer --> Hardware_Load_Balancer
+    Load_Balancer --> Shared_Load_Balancer_Service
+    Load_Balancer --> Server_with_Load_Balancing_Software
+
+    subgraph Hardware_Load_Balancer_Details
+        Hardware_Load_Balancer --> Expensive_Cost
+        Hardware_Load_Balancer --> Physical_Device
+    end
+
+    subgraph Shared_Load_Balancer_Service_Details
+        Shared_Load_Balancer_Service --> LBaaS
+    end
+
+    subgraph Server_with_Load_Balancing_Software_Details
+        Server_with_Load_Balancing_Software --> HAProxy
+        Server_with_Load_Balancing_Software --> NGINX
+    end

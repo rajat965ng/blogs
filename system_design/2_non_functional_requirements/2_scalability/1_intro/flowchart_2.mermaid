@@ -1,0 +1,48 @@
+flowchart LR
+    A[Scalability] --> B[Vertical Scaling]
+    A --> C[Horizontal Scaling]
+    B --> B1[Upgrade hardware of single host]
+    C --> C1[Spread load across multiple hosts]
+
+    B1 --> B1a[Increase CPU processing power]
+    B1 --> B1b[Add more RAM]
+    B1 --> B1c[Expand storage capacity]
+    B1 --> B1d[Upgrade network bandwidth]
+
+    B1c --> B1c1[Utilize solid-state drive for lower latency]
+
+    B1d --> B1d1[Use network card with higher bandwidth]
+
+    B1 --> B1e[Downtime required]
+
+    B1e --> B1e1[Technological limits]
+    B1e --> B1e2[Cost increases faster than performance]
+
+    B1e2 --> B1e2a[Custom mainframe vs. commodity machines]
+
+    B1e2a --> B1e2a1[Cost-performance ratio]
+
+    B1e2a1 --> B1e2a1a[Point of diminishing returns]
+
+    B1e2 --> B1e2b[Technological limitations]
+
+    B1e2b --> B1e2b1[Maximum processing power, RAM, storage capacity]
+
+    B1e2 --> B1e2c[Downtime]
+
+    B1e2c --> B1e2c1[Stop host, change hardware, start again]
+
+    C1 --> C1a[Direct requests to multiple hosts]
+    C1 --> C1b[Store service's state in different hosts]
+
+    C1b --> C1b1[Achieve scalability, availability, fault-tolerance]
+
+    C1 --> C1c[Achieve 'true' scalability]
+
+    A --> D[Customer Scalability Requirements]
+
+    D --> D1[Data transfer to and from system]
+    D --> D2[Read queries per second]
+    D --> D3[Data size per request]
+    D --> D4[Video views per second]
+    D --> D5[Sudden traffic spike size]
