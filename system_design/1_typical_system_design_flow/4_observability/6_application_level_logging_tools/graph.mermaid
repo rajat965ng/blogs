@@ -1,0 +1,45 @@
+graph LR
+    subgraph Logging Tools
+        A((ELK Suite)) --> B[Logstash]
+        A --> C[Elasticsearch]
+        A --> D[Kibana]
+        B --> E[Collect & Manage Logs]
+        C --> F[Search Engine]
+        C --> G[Storage & Indexing]
+        C --> H[Searching Logs]
+        D --> I[Visualization & Dashboarding]
+        D --> J[Uses Elasticsearch as Data Source]
+        D --> K[Log Searching]
+    end
+
+    subgraph Monitoring Tools
+        L((Prometheus + Grafana)) --> M[Prometheus]
+        L --> N[Grafana]
+        M --> O[Monitoring]
+        N --> P[Visualization & Dashboarding]
+        Q((Sensu)) --> R[Redis]
+        Q --> S[Monitoring]
+        R --> T[Data Storage]
+        R --> U[Alerting]
+        V((Nagios)) --> W[Monitoring & Alerting]
+        X((Zabbix)) --> Y[Monitoring & Dashboarding]
+    end
+
+    subgraph Proprietary Tools
+        Z((Splunk)) --> AA[Logging & Monitoring]
+        BB((Datadog)) --> CC[Logging & Monitoring]
+        DD((New Relic)) --> EE[Logging & Monitoring]
+    end
+
+    subgraph Time Series Database
+        FF((TSDB)) --> GG[Optimized for Time Series]
+        GG --> HH[Continuous Writes]
+        HH --> II[Down Sampling]
+        II --> JJ[Data Rollup]
+        JJ --> KK[Storage Optimization]
+    end
+
+    style A fill:#F9EBEA
+    style L fill:#F9EBEA
+    style Z fill:#F9EBEA
+    style FF fill:#F9EBEA
