@@ -1,0 +1,58 @@
+graph TD;
+    Coordination_Service --> Choose_Leader;
+    Coordination_Service --> Assign_Followers;
+    Choose_Leader --> Leader_Node;
+    Leader_Node --> Follower_Node1;
+    Leader_Node --> Follower_Node2;
+    Leader_Node --> Follower_Node3;
+    Leader_Node --> Follower_NodeN;
+
+    Coordination_Service[Coordination Service];
+    Choose_Leader[Choose Leader];
+    Assign_Followers[Assign Followers];
+    Leader_Node[Leader Node];
+    Follower_Node1[Follower Node 1];
+    Follower_Node2[Follower Node 2];
+    Follower_Node3[Follower Node 3];
+    Follower_NodeN[Follower Node N];
+
+    ZooKeeper --> Advantages;
+    ZooKeeper --> Disadvantages;
+    ZooKeeper --> Features;
+
+    Coordination_Service[Coordination Service];
+    ZooKeeper[ZooKeeper];
+    Advantages[Advantages];
+    Disadvantages[Disadvantages];
+    Features[Features];
+
+    Choose_Leader -->|Example Algorithms| Paxos;
+    Choose_Leader -->|Example Algorithms| Raft;
+    Choose_Leader -->|Example Algorithms| Zab;
+    Choose_Leader -->|Example Algorithms| SQL;
+
+    Coordination_Service -.-> Complexity;
+    Coordination_Service -.-> One_Leader;
+
+    Complexity[Complexity];
+    One_Leader["Ensure one and only one leader is elected"];
+
+    Paxos["Paxos"];
+    Raft["Raft"];
+    Zab["Zab"];
+    SQL["SQL"];
+
+    Coordination_Service -.-> Complexity;
+    Coordination_Service -.-> One_Leader;
+
+    Complexity[Complexity];
+    One_Leader["Ensure one and only one leader is elected"];
+
+    Advantages["1. Access control\n2. High performance in-memory data storage\n3. Horizontal scalability\n4. Guaranteed consistency\n5. Sequential data reading"];
+    Disadvantages["Complexity"];
+
+    subgraph ZooKeeper
+        Advantages
+        Disadvantages
+        Features
+    end

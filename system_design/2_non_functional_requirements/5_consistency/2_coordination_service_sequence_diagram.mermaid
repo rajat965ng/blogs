@@ -1,0 +1,38 @@
+sequenceDiagram
+    participant CoordinationService
+    participant LeaderNode
+    participant FollowerNode1
+    participant FollowerNode2
+    participant FollowerNode3
+    participant FollowerNodeN
+
+    CoordinationService->>LeaderNode: Choose leader
+    CoordinationService->>FollowerNode1: Assign as follower
+    CoordinationService->>FollowerNode2: Assign as follower
+    CoordinationService->>FollowerNode3: Assign as follower
+    CoordinationService->>FollowerNodeN: Assign as follower
+
+    loop Leader handles messages
+        LeaderNode->>LeaderNode: Process messages
+    end
+
+    FollowerNode1->>LeaderNode: Send message
+    LeaderNode->>FollowerNode1: Process message
+    LeaderNode->>FollowerNode1: Send response
+
+    FollowerNode2->>LeaderNode: Send message
+    LeaderNode->>FollowerNode2: Process message
+    LeaderNode->>FollowerNode2: Send response
+
+    FollowerNode3->>LeaderNode: Send message
+    LeaderNode->>FollowerNode3: Process message
+    LeaderNode->>FollowerNode3: Send response
+
+    FollowerNodeN->>LeaderNode: Send message
+    LeaderNode->>FollowerNodeN: Process message
+    LeaderNode->>FollowerNodeN: Send response
+
+    Note right of CoordinationService: Role of the coordination service\nis to choose and manage leaders\nExample algorithms: Paxos, Raft, Zab
+    Note right of LeaderNode: Leader manages followers\nand handles incoming messages\nExample: Single leader multiple follower in SQL
+    Note right of CoordinationService: ZooKeeper features:\n1. Access control\n2. High-performance in-memory data storage\n3. Horizontal scalability\n4. Guaranteed eventual or strong consistency\n5. Sequential data reading
+    Note right of CoordinationService: Disadvantages include complexity\nand the need for high reliability\nIt is a CP system in CAP theorem,\ntrading off availability for consistency

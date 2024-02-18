@@ -1,0 +1,19 @@
+sequenceDiagram
+    participant NewHost
+    participant AllHosts
+    participant ConfigFile
+    participant ThirdPartyService
+
+    NewHost->>AllHosts: How to discover each other?
+    AllHosts->>ConfigFile: Maintain list of addresses
+    ConfigFile->>AllHosts: Updated list
+    AllHosts->>AllHosts: Broadcasts messages to all hosts
+    AllHosts->>NewHost: Response with list of addresses
+
+    NewHost->>AllHosts: How to handle new host addition?
+    AllHosts->>ThirdPartyService: Use third-party service
+    ThirdPartyService->>AllHosts: Listens for heartbeats
+    AllHosts->>AllHosts: Registers new host
+    AllHosts->>NewHost: Response with list of addresses
+
+    Note right of AllHosts: Full mesh not scalable, quadratic growth\nQuorum requires majority for consistency\nBitTorrent uses full mesh for decentralized p2p file sharing

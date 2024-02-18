@@ -1,0 +1,96 @@
+graph LR;
+    subgraph Distributed_System
+        Coordination_Service --> Leader_Node
+        Leader_Node --> Follower_Node1
+        Leader_Node --> Follower_Node2
+        Leader_Node --> Follower_Node3
+        Leader_Node --> Follower_NodeN
+    end
+
+    Coordination_Service -.-> Choose_Leader
+    Coordination_Service -.-> Assign_Followers
+    Leader_Node -.-> Process_Messages
+    Follower_Node1 -.-> Send_Message
+    Leader_Node -.-> Process_Message
+    Leader_Node -.-> Send_Response
+    Follower_Node2 -.-> Send_Message
+    Leader_Node -.-> Process_Message
+    Leader_Node -.-> Send_Response
+    Follower_Node3 -.-> Send_Message
+    Leader_Node -.-> Process_Message
+    Leader_Node -.-> Send_Response
+    Follower_NodeN -.-> Send_Message
+    Leader_Node -.-> Process_Message
+    Leader_Node -.-> Send_Response
+
+    classDef coordinationService fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef leaderNode fill:#9cf,stroke:#333,stroke-width:2px;
+    classDef followerNode fill:#ccf,stroke:#333,stroke-width:2px;
+
+    class Coordination_Service coordinationService;
+    class Leader_Node leaderNode;
+    class Follower_Node1,Follower_Node2,Follower_Node3,Follower_NodeN followerNode;
+
+    Coordination_Service["Coordination Service"];
+    Leader_Node["Leader Node"];
+    Follower_Node1["Follower Node 1"];
+    Follower_Node2["Follower Node 2"];
+    Follower_Node3["Follower Node 3"];
+    Follower_NodeN["Follower Node N"];
+
+    Coordination_Service -.-> Example_Algorithms
+    Coordination_Service -.-> ZooKeeper
+    ZooKeeper -.-> Advantages
+    ZooKeeper -.-> Disadvantages
+    ZooKeeper -.-> Features
+
+    classDef zooKeeper fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef advantages fill:#9cf,stroke:#333,stroke-width:2px;
+    classDef disadvantages fill:#ccf,stroke:#333,stroke-width:2px;
+    classDef exampleAlgorithms fill:#f6f,stroke:#333,stroke-width:2px;
+
+    class ZooKeeper zooKeeper;
+    class Advantages advantages;
+    class Disadvantages disadvantages;
+    class Example_Algorithms exampleAlgorithms;
+
+    subgraph ZooKeeper
+        Advantages
+        Disadvantages
+        Features
+    end
+
+    Example_Algorithms["Example Algorithms"];
+    Features["1. Access control\n2. High-performance in-memory data storage\n3. Scalability by adding hosts\n4. Guaranteed eventual or strong consistency\n5. Sequential data reading"];
+    Advantages["Advantages"];
+    Disadvantages["Disadvantages"];
+
+    Choose_Leader["Choose Leader"];
+    Assign_Followers["Assign Followers"];
+    Process_Messages["Process Messages"];
+    Send_Message["Send Message"];
+    Process_Message["Process Message"];
+    Send_Response["Send Response"];
+
+    Coordination_Service ==> Choose_Leader;
+    Coordination_Service ==> Assign_Followers;
+    Leader_Node ==> Process_Messages;
+    Follower_Node1 ==> Send_Message;
+    Leader_Node ==> Process_Message;
+    Leader_Node ==> Send_Response;
+    Follower_Node2 ==> Send_Message;
+    Leader_Node ==> Process_Message;
+    Leader_Node ==> Send_Response;
+    Follower_Node3 ==> Send_Message;
+    Leader_Node ==> Process_Message;
+    Leader_Node ==> Send_Response;
+    Follower_NodeN ==> Send_Message;
+    Leader_Node ==> Process_Message;
+    Leader_Node ==> Send_Response;
+
+    subgraph ZooKeeper_Comparison
+        Coordination_Service -.-> ZooKeeper[Comparison to ZooKeeper]
+    end
+
+    ZooKeeper ==> ZooKeeper_Comparison;
+    class ZooKeeper_Comparison fill:#ff9,stroke:#333,stroke-width:2px;

@@ -1,0 +1,26 @@
+graph TD;
+
+    subgraph Host_Discovery_Solutions
+        config_file[Configuration File] -->|Updated and deployed| All_Hosts;
+        third_party_service[Third-Party Service] -->|Receives heartbeats| All_Hosts;
+    end
+
+    subgraph Full_Mesh
+        full_mesh[Full Mesh] -->|Broadcasts messages to all hosts| All_Hosts;
+    end
+
+    subgraph Quorum
+        quorum[Quorum] -->|Majority of hosts have same data| All_Hosts;
+    end
+
+    config_file -.-> third_party_service
+
+    subgraph Advantages_Disadvantages
+        scalability[Scalable Approach] -.->|Less scalable/quadratic growth of messages| full_mesh;
+        full_mesh -.->|Easier to implement| scalability;
+        scalability -.->|Complexity and message overhead| Quorum;
+    end
+
+    subgraph Example
+        bittorrent[BitTorrent] -->|Uses full mesh for decentralized p2p file sharing| full_mesh;
+    end
