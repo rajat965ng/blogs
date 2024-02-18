@@ -1,0 +1,31 @@
+flowchart TD
+    subgraph "Security Vulnerabilities"
+        1[TLS Termination]
+        2[Encryption in Transit]
+        3[Encryption at Rest]
+        4[Authentication/Authorization]
+        5[Rate Limiting for DDoS Prevention]
+    end
+
+    subgraph "Prevention and Mitigation"
+        6[Keep Sensitive Data Encrypted]
+        7[Implement Proper TLS Configuration]
+        8[Use Strong Encryption Algorithms]
+        9[Enforce Access Control Policies]
+        10[Regular Security Audits]
+        11[Implement OAuth 2.0 and OpenID Connect]
+        12[Implement Rate Limiting Policies]
+    end
+
+    1-->2
+    2-->6
+    3-->6
+    4-->11
+    5-->12
+    6-->7
+    6-->8
+    7-->9
+    8-->9
+    9-->10
+    11-->9
+    12-->9

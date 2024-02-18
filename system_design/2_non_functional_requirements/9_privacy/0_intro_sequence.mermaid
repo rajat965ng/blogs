@@ -1,0 +1,28 @@
+sequenceDiagram
+    participant PII
+    participant Regulations
+    participant System
+    participant AccessControl
+    participant LDAP
+    participant Encryption
+    participant HashingAlgorithms
+    participant HDFS
+    participant EncryptionKeys
+    participant SQL
+    participant DataDeletion
+    participant PrivacyDiscussion
+    participant BreachMitigation
+
+    PII-->Regulations: Subject to General Data Protection Regulation (GDPR), Payment Card Industry Data Security Standard (PCI DSS)
+    Regulations->>System: Compliance required
+    System->>AccessControl: Apply access control mechanisms
+    System->>LDAP: Utilize LDAP for access control
+    System->>Encryption: Encrypt data in transit and at rest
+    System->>HashingAlgorithms: Use SHA-2/SHA-3 for masking PII
+    System->>HDFS: Store PII securely
+    System->>EncryptionKeys: Assign encryption keys to customers
+    EncryptionKeys->>SQL: Store encryption keys
+    EncryptionKeys->>DataDeletion: Use encryption keys for data deletion
+    DataDeletion->>HDFS: Delete customer data
+    PrivacyDiscussion-->>System: Discuss complexity, cost, and effects of privacy
+    PrivacyDiscussion-->>BreachesMitigation: Discuss prevention and mitigation strategies

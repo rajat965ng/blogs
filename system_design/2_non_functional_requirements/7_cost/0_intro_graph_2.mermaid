@@ -1,0 +1,47 @@
+flowchart TB
+    subgraph "Trade-offs for Lower Cost"
+        subgraph "Higher Cost for Lower Complexity"
+            1[Vertical Scaling]
+        end
+        subgraph "Lower Availability for Improved Costs"
+            2[Decrease Redundancy]
+        end
+        subgraph "Higher Latency for Improved Costs"
+            3[Use Cheaper Data Center]
+        end
+    end
+
+    subgraph "Cost Analysis"
+        4[Cost of Implementation]
+        5[Cost of Monitoring]
+        6[Cost of High Availability]
+        7[Cost of Maintenance]
+        8[Cost to Decommission System]
+    end
+
+    subgraph "Future Considerations"
+        9[Identify Components Needing Updates]
+        10[Assess Dependencies]
+        11[Plan for Dependency Replacement]
+        12[Consider Likelihood of Dependency Changes]
+        13[Assess Third-party Dependencies]
+    end
+
+    subgraph "Decommissioning Considerations"
+        14[Decommission System]
+        15[Data Extraction for Users]
+    end
+
+    1-->4
+    2-->6
+    3-->5
+    4-->7
+    5-->7
+    6-->7
+    7-->8
+    9-->11
+    10-->11
+    11-->12
+    12-->13
+    13-->14
+    14-->15

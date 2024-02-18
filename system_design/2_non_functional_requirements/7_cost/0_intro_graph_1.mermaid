@@ -1,0 +1,26 @@
+graph LR;
+    subgraph "1. Trade-offs for Lower Cost"
+        A[Higher cost for lower complexity] --> B[Vertical scaling instead of horizontal scaling]
+        C[Lower availability for improved costs] --> D[Decrease redundancy of system]
+        E[Higher latency for improved costs] --> F[Use cheaper data center location further from users]
+    end
+    subgraph "2. Cost Considerations"
+        G[Cost of implementation]
+        H[Cost of monitoring]
+        I[Cost of non-functional requirements e.g., high availability]
+        J[Cost of maintenance: addressing production problems]
+        K[Cost of software atrophy over time]
+        L[Cost of future updates and dependencies]
+        M[Cost of decommissioning the system]
+    end
+    subgraph "3. Future Updates and Dependencies"
+        N[Identify components needing future updates]
+        O[Dependencies preventing easy updates]
+        P[Design for easy dependency replacement]
+        Q[Likelihood of needing to change dependencies]
+        R[Consideration of third-party dependencies]
+    end
+    subgraph "4. Decommissioning Considerations"
+        S[Reasons for decommissioning]
+        T[Extract data for existing users]
+    end

@@ -1,0 +1,20 @@
+sequenceDiagram
+    participant SystemDesigner
+    participant Engineer
+    participant System
+    participant ExternalParties
+    participant InternalOrganization
+
+    SystemDesigner->>Engineer: Discuss security vulnerabilities
+    SystemDesigner->>Engineer: Mention TLS termination vs encryption in transit
+    Engineer->>System: Implement TLS termination
+    Engineer->>System: Encrypt sensitive data in transit
+    System->>ExternalParties: Data transfer with TLS termination
+    Engineer->>System: Determine data encryption at rest
+    Engineer->>System: Implement encryption at rest
+    System->>InternalOrganization: Data storage with encryption at rest
+    Engineer->>System: Implement OAuth 2.0 and OpenID Connect
+    System->>ExternalParties: Authentication with OAuth 2.0 and OpenID Connect
+    Engineer->>System: Configure rate limiting
+    System->>ExternalParties: Requests with rate limiting
+    System->>InternalOrganization: Requests with rate limiting
