@@ -1,0 +1,44 @@
+graph LR
+    subgraph Cloud Native Approach
+        A[Scalability] --> D[Cloud Native Technologies]
+        B[Fault-Tolerance] --> D
+        C[Maintainability] --> D
+    end
+
+    subgraph Cloud Native Technologies
+        D[Cloud Native Technologies] --> E[Containers]
+        D --> F[Service Meshes]
+        D --> G[Microservices]
+        D --> H[Immutable Infrastructure]
+        D --> I[Declarative APIs]
+    end
+
+    subgraph Benefits
+        E --> L[Resilient]
+        F --> L
+        G --> L
+        H --> L
+        I --> L
+        E --> M[Manageable]
+        F --> M
+        G --> M
+        H --> M
+        I --> M
+        E --> N[Observable]
+        F --> N
+        G --> N
+        H --> N
+        I --> N
+    end
+
+    subgraph Robust Automation
+        O[Robust Automation] --> P[High-Impact Changes]
+        O --> Q[Frequent and Predictable Changes]
+        O --> R[Minimal Toil]
+    end
+
+    A --> D
+    B --> D
+    C --> D
+    D --> O
+    P --> Q
