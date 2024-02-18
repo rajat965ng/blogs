@@ -1,0 +1,18 @@
+graph LR;
+    Fault_tolerance_and_Availability --> |Fault_tolerance| Graceful_Degradation;
+    Fault_tolerance_and_Availability --> |Fault_tolerance| Self-healing_Mechanisms;
+    Fault_tolerance_and_Availability --> |Availability| Uptime_Downtime;
+    Fault_tolerance_and_Availability --> |Failure_Design| Error_Handling;
+    Error_Handling --> Third_party_API_Errors;
+    Error_Handling --> Silent_Undetected_Errors;
+    Fault_tolerance --> Techniques;
+    Techniques --> Replication_Redundancy;
+    Techniques --> Forward_Error_Correction;
+    Techniques --> Circuit_Breaker;
+    Techniques --> Exponential_Backoff_Retry;
+    Techniques --> Caching_Responses;
+    Techniques --> Checkpointing;
+    Techniques --> Dead_Letter_Queue;
+    Techniques --> Logging_Auditing;
+    Techniques --> Bulkhead;
+    Techniques --> Fallback_Pattern;

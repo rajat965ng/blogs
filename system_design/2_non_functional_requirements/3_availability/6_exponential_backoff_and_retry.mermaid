@@ -1,0 +1,24 @@
+graph LR;
+    A[Start] --> B[Client Sends Request];
+    B --> C[Evaluate Response];
+    C --> D{Error Response?};
+    D -- Yes --> E[Exponential Backoff];
+    E --> F[Increase Wait Duration];
+    F --> G{Maximum Retry Attempts Reached?};
+    G -- No --> H[Adjust Wait Period with Jitter];
+    G -- Yes --> I[Stop Retry];
+    H --> I;
+    I --> J[End];
+    D -- No --> K[Success Response];
+    K --> L[Reset Retry Attempts];
+    L --> M[End Retry];
+
+    subgraph Jitter
+        N[Randomly Adjust Wait Period]
+    end
+
+    subgraph RetryStorm
+        O[Multiple Clients Retry Simultaneously]
+    end
+
+    N --> |Prevents|O

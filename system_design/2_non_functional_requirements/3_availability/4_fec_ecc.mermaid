@@ -1,0 +1,13 @@
+graph TD;
+    A[Start] --> B[Data Transmission];
+    B --> C[Noise/Unreliable Communication Channels];
+    C --> D[Apply Forward Error Correction FEC];
+    D --> E[Encode Message with Redundancy];
+    E --> F[Using Error Correction Code ECC];
+    F --> G[Transmission with Redundant Data];
+    G --> H[Receiving End];
+    H --> I[Decoding];
+    I --> J[Error Correction];
+    J --> K[Corrected Data];
+    K --> L[Data Processing];
+    L --> M[End];

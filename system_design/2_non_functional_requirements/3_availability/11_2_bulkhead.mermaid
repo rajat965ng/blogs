@@ -1,0 +1,36 @@
+graph LR;
+    subgraph Service
+        subgraph Endpoint1
+            threadpool1(Thread Pool)
+        end
+        subgraph Endpoint2
+            threadpool2(Thread Pool)
+        end
+        subgraph Endpoint3
+            threadpool3(Thread Pool)
+        end
+    end
+
+    subgraph Logging_and_Monitoring
+        subgraph Logging
+            log(Log Crash)
+        end
+        subgraph Monitoring
+            monitor(Alert)
+        end
+        log -.-> monitor
+        monitor -.-> Engineers
+    end
+
+    subgraph Requestors
+        subgraph Requestor1
+            req1(Requests)
+        end
+        subgraph Requestor2
+            req2(Requests)
+        end
+    end
+
+    req1 --> threadpool1
+    req2 --> threadpool2
+    req1 --> threadpool3

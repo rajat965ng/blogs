@@ -1,0 +1,21 @@
+graph LR;
+    subgraph Fallback_Pattern
+        subgraph Problem_Detection
+            detect[Detect Problem]
+        end
+        subgraph Alternative_Code_Path
+            alt[Execute Alternative Code Path]
+        end
+    end
+
+    subgraph Cached_Responses
+        cache[Cache Responses]
+    end
+
+    subgraph Alternative_Services
+        third_party[Third-Party API]
+    end
+
+    detect --> alt
+    alt --> cache
+    alt --> third_party

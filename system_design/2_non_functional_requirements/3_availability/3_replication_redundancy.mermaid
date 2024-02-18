@@ -1,0 +1,33 @@
+graph TD;
+    A[Start] --> B{Replication Technique};
+    B --> |Yes| C[Designate one instance as Source of Truth];
+    B --> |No| D[Continue without replication];
+
+    C --> E[Assign update operations];
+    C --> F[Perform reads on all replicas];
+
+    E --> G[Performance Impact];
+    G --> H[If other hosts are geographically further away];
+    H --> I[Yes];
+    I --> J[Update performance affected];
+    H --> |No| J;
+
+    F --> K[Performance Impact];
+    K --> L[If components are down];
+    L --> M[Yes];
+    M --> N[Read performance decreases];
+    L --> |No| N;
+
+    J --> O{Arrange Replicas};
+    O --> |One replica in same data center, one in different data center| P;
+    O --> |All replicas in different data centers| Q;
+
+    P --> R[Tradeoff between fault-tolerance and performance];
+    Q --> R;
+
+    R --> S[Example: Hadoop Distributed File System];
+    S --> T[Configurable replication factor];
+    T --> U[Default value: 3];
+    U --> V[Replication increases availability];
+    V --> End;
+    N --> End[End];

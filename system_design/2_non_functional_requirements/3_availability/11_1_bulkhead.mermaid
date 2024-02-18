@@ -1,0 +1,20 @@
+sequenceDiagram
+    participant Service
+    participant Monitoring
+    participant Logging
+    participant Engineers
+
+    Service ->> Monitoring: Detect offending request
+    Monitoring -->> Engineers: Alert about offending request
+    Engineers ->> Logging: Investigate crash
+    Engineers -->> Logging: Troubleshoot and determine cause
+
+    Service ->> Monitoring: Detect high request rate
+    Monitoring -->> Engineers: Alert about high request rate
+    Engineers ->> Logging: Investigate request rate
+    Engineers -->> Logging: Troubleshoot and determine cause
+
+    Service ->> Service: Divided into isolated pools
+    Service ->> Service: Each pool allocated to requestors
+    Service ->> Service: Pools prevent requestors from affecting entire system
+    Service ->> Service: Technique to prioritize requestors by allocating resources

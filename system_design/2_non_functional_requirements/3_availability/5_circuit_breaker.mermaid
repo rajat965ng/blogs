@@ -1,0 +1,14 @@
+graph LR;
+    A[Start] --> B[Client sends requests];
+    B --> C[Check downstream service responses];
+    C --> D{Error threshold exceeded?};
+    D -->|No| E[Continue sending requests];
+    D -->|Yes| F[Open circuit breaker];
+    F --> G[Stop sending requests];
+    G --> H[Wait for timeout];
+    H --> I[Attempt limited number of requests];
+    I --> J{Successful requests?};
+    J -->|Yes| K[Close circuit breaker];
+    K --> B;
+    J -->|No| L[Wait for another timeout];
+    L --> B;

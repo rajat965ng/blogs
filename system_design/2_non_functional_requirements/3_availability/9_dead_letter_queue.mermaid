@@ -1,0 +1,11 @@
+graph LR;
+    A[Write Request to Third-party API] --> B{Failure?};
+    B -- Yes --> C[Queue Request in Dead Letter Queue];
+    C --> D[Try Again Later];
+    B -- No --> E[Success];
+
+    subgraph Options
+        D --> F[Option 1: Drop Failed Requests];
+        D --> |try-catch block| G[Option 2: Implement Local Dead Letter Queue];
+        D --> |Kafka| H[Option 3: Use Event-Streaming Platform];
+    end

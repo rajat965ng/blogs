@@ -1,0 +1,10 @@
+graph LR;
+    A[Write Request] --> B{Success?};
+    B -- Yes --> C[No Action];
+    B -- No --> D[Log Write Request];
+    D --> E[Periodic Auditing];
+    E --> F[Verify Data Integrity];
+
+    subgraph Method
+        D --> G[Handle Silent Errors];
+    end

@@ -1,0 +1,19 @@
+graph TD;
+    A[Start] --> B[Fetch Subset of Data Points];
+    B --> C[Perform Aggregation];
+    C --> D[Write Result];
+    D --> E{More Data Points?};
+    E -- Yes --> F[Write Checkpoint];
+    F --> B;
+    E -- No --> G[Process Completed];
+
+    subgraph Checkpointing
+        G --> H[Machine Failure];
+        H --> I[Replacement Machine];
+        I --> J[Resume from Checkpoint];
+        J --> B;
+    end
+
+    subgraph Kafka
+        K[Data Events] --> L[Consumed by Flink];
+    end

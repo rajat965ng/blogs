@@ -1,0 +1,11 @@
+graph LR;
+    A[Start] --> B[Send Request to External Service];
+    B --> C[Evaluate Response];
+    C -->|Success| D[Use Response Data];
+    C -->|Failure| E[Handle Unavailability];
+
+    subgraph Graceful Degradation
+        E --> F{Stale Data Available?};
+        F -- Yes --> G[Use Cached Data];
+        F -- No --> H[Use Default or Empty Response];
+    end

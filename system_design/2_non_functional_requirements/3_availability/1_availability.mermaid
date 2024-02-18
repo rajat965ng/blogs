@@ -1,0 +1,27 @@
+graph LR;
+    Availability --> High_Availability;
+    High_Availability --> |Trade-offs| Non_Functional_Requirements;
+    Non_Functional_Requirements --> |Assessment| CAP_Theorem;
+    CAP_Theorem --> Trade_Offs;
+    Trade_Offs --> Asynchronous_Communication;
+    Asynchronous_Communication --> |Examples| Event_Sourcing;
+    Asynchronous_Communication --> Saga;
+    Non_Functional_Requirements --> Synchronous_Communication;
+    Synchronous_Communication --> |Immediate Response| People_Requests;
+    Synchronous_Communication --> |Considerations| Delayed_Response;
+    Delayed_Response --> Acknowledgment;
+    Delayed_Response --> |Example| Tax_Payment;
+    Tax_Payment --> Queueing;
+    Tax_Payment --> Notification;
+    Notification --> Email;
+    Notification --> Text;
+    Notification --> App_Notifications;
+    High_Availability --> No_Required;
+    No_Required --> Caching_Service;
+    Caching_Service --> |Trade-off| Lower_Latency;
+    Availability --> Incident_Metrics;
+    Incident_Metrics --> MTTR;
+    Incident_Metrics --> MTBF;
+    MTTR --> |Mean Time to Recovery| Dashboards;
+    MTBF --> |Mean Time Between
+ Failures| Dashboards;
