@@ -1,0 +1,19 @@
+sequenceDiagram
+    participant Client
+    participant Host1
+    participant Host2
+    participant Host3
+    participant Leader1
+    participant Leader2
+    Client->>Host1: Request to elect a leader
+    Client->>Host2: Request to elect a leader
+    Client->>Host3: Request to elect a leader
+    Host1->>Leader1: Election request
+    Host2->>Leader1: Election request
+    Host3->>Leader2: Election request
+    Leader1->>Host1: Election response
+    Leader1->>Host2: Election response
+    Leader2->>Host3: Election response
+    Host1-->>Client: Leader elected
+    Host2-->>Client: Leader elected
+    Host3-->>Client: Leader elected

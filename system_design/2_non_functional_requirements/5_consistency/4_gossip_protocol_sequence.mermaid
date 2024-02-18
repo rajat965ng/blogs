@@ -1,0 +1,10 @@
+sequenceDiagram
+    participant Node1
+    participant Node2
+    participant Node3
+    Node1->>Node2: Selects Node2
+    Node1->>Node2: Shares data
+    Node2->>Node1: Acknowledges
+    Node2->>Node3: Selects Node3
+    Node2->>Node3: Shares data
+    Node3->>Node2: Acknowledges

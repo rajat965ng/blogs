@@ -1,0 +1,11 @@
+graph TD;
+    A[Start] --> B{Is it Random Leader Selection?};
+    B -- Yes --> C[Use simple algorithm to elect leader];
+    C --> D{Is it Kafka?};
+    D -- Yes --> E[Use leader-follower replication with random leader selection];
+    D -- No --> F{Is it YARN?};
+    F -- Yes --> G[Use random leader selection for resource allocation];
+    F -- No --> H[End];
+    E --> I[End];
+    G --> I;
+    H --> I;

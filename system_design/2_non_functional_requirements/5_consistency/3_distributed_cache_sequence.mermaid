@@ -1,0 +1,21 @@
+sequenceDiagram
+    participant Service_Node as Service's Nodes
+    participant Origin as Origin
+    participant Distributed_Cache as Distributed Cache
+    participant Sender_Host as Sender Host
+    participant Receiver_Host as Receiver Host
+    participant Alert as Alert
+    participant Coordination_Service as Coordination Service
+
+    Service_Node->>Origin: Periodic requests
+    Origin-->>Distributed_Cache: Fetch new data
+    Distributed_Cache-->>Service_Node: Update data
+
+    Sender_Host->>Receiver_Host: HTTP request with message
+    alt Invalid message
+        Receiver_Host->>Sender_Host: Return 400 or 422
+        Sender_Host->>Alert: Trigger high-urgency alerts
+        Alert--x Coordination_Service: Investigate
+    end
+
+    Coordination_Service->>Receiver_Host: Schema validation

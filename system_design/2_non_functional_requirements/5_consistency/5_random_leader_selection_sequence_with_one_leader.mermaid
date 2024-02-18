@@ -1,0 +1,22 @@
+sequenceDiagram
+    participant Client
+    participant Leader
+    participant Host1
+    participant Host2
+    participant Host3
+    Client->>Leader: Request to elect a leader
+    Leader->>Host1: Broadcast election request
+    Leader->>Host2: Broadcast election request
+    Leader->>Host3: Broadcast election request
+    Host1->>Leader: Accept election
+    Host2->>Leader: Accept election
+    Host3->>Leader: Accept election
+    Leader-->>Client: Leader elected
+    Client->>Leader: Send data request
+    Leader->>Host1: Forward data request
+    Host1-->>Leader: Send data
+    Leader->>Host2: Forward data request
+    Host2-->>Leader: Send data
+    Leader->>Host3: Forward data request
+    Host3-->>Leader: Send data
+    Leader-->>Client: Respond with data

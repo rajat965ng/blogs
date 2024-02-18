@@ -1,0 +1,44 @@
+sequenceDiagram
+    participant System
+    participant EstimationAlgorithms
+    participant Cache
+    participant Database
+    participant Presto
+    participant Stream
+
+    Note over System: Accuracy is a relevant non-functional requirement
+
+    System ->> EstimationAlgorithms: Estimation algorithms trade off accuracy for complexity
+    EstimationAlgorithms ->> System: Examples: HyperLogLog, Count-min sketch
+
+    Note over System: HyperLogLog used for COUNT DISTINCT estimate in Presto
+
+    System ->> Presto: HyperLogLog for cardinality estimation
+
+    Note over System: Cache becomes stale if underlying data modified
+
+    System ->> Cache: Data modification in underlying database
+
+    Note over Cache: Cache may have refresh policy
+
+    Cache ->> Database: Fetch latest data at periodic interval
+    Database ->> Cache: Send updated data
+
+    Note over Cache: Short refresh policy is more costly
+
+    Note over Cache: Alternative is to update or delete cache key upon data modification
+
+    Note over System: Accuracy somewhat related to consistency
+
+    System ->> System: Eventually consistent systems trade off accuracy for availability, complexity, and cost
+
+    Note over System: Results from reads may not include effects of recent writes
+
+    System ->> System: Eventually consistent system is inaccurate until replicas updated
+
+    Note over System: Inaccuracy addressed in consistency, not accuracy
+
+    Note over System: Example of estimation algorithm for stream data
+
+    System ->> Stream: Count-min sketch for estimating frequencies
+

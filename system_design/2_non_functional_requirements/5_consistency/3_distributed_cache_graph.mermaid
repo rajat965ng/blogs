@@ -1,0 +1,14 @@
+flowchart TD
+    A[Service's Nodes] -->|Periodic requests| B[Origin]
+    B -->|Fetch new data| C[Distributed Cache]
+    C -->|Update data| A
+
+    D[Sender Host] -->|HTTP request with invalid message| E[Receiver Host]
+    E[Receiver Host] -->|Return 400 or 422| D
+    E -->|Log 400 or 422| G[Alert]
+    G -->|Trigger high-urgency alerts| H[Investigate]
+    I[Redis] -->|No schema validation| J[Hosts write arbitrary data]
+    I -->|No encryption| K[Privacy concern]
+    K -->|Implement encryption| L[Increased complexity, costs, reduced performance]
+    I -->|Trusted clients, trusted environments| M[Security]
+    N[Coordination Service] -->|Address disadvantages| O[Higher complexity, cost]

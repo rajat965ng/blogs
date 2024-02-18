@@ -1,0 +1,11 @@
+graph TD;
+    A[Start] --> B{Randomly select another node};
+    B -- Yes --> C[Share data];
+    C --> D{Is it Cassandra?};
+    D -- Yes --> E[Use gossip protocol for consistency];
+    D -- No --> F{Is it DynamoDB?};
+    F -- Yes --> G[Use gossip protocol with vector clocks];
+    F -- No --> H[End];
+    E --> I[End];
+    G --> I;
+    H --> I;
