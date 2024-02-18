@@ -1,0 +1,24 @@
+sequenceDiagram
+    participant Developer
+    participant CD_Server
+    participant Production_Server
+
+    Developer->>CD_Server: Push Code Changes
+    CD_Server->>CD_Server: Automated Build & Test
+    CD_Server->>Production_Server: Deploy to Production
+    Production_Server->>CD_Server: Confirm Deployment Success
+    alt Deployment Success
+        CD_Server-->>Developer: Deployment Success Notification
+    else Deployment Failure
+        Production_Server-->>CD_Server: Deployment Failure Notification
+        CD_Server-->>Developer: Deployment Failure Notification
+    end
+    Developer->>Production_Server: Monitor System
+    alt Buggy Build Detected
+        Developer->>CD_Server: Rollback Request
+        CD_Server->>Production_Server: Rollback to Previous Version
+        Production_Server-->>CD_Server: Rollback Success
+        CD_Server-->>Developer: Rollback Success Notification
+    else No Issues Detected
+        CD_Server-->>Developer: System OK Notification
+    end
