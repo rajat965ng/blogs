@@ -1,0 +1,28 @@
+graph TD;
+    subgraph ACID_Consistency
+        ACID[ACID Consistency] --> |Focuses on data relationships like foreign keys and uniqueness| ACID_DB;
+        ACID_DB[RDBMS Databases] --> |Cannot accept writes during network partition| Cannot_accept_writes;
+        Cannot_accept_writes[Cannot Accept Writes] --> |Due to inability to maintain ACID consistency| Network_partition;
+    end
+
+    subgraph CAP_Consistency
+        CAP[CAP Consistency: Linearizability] --> |All nodes containing the same data at a moment in time| Linearizability;
+        Linearizability[Linearizability] --> |Changes in data must be linear| Changes_linear;
+        Changes_linear[Changes in data must be linear] --> |Nodes must start serving changes at the same time| Nodes_start_serving;
+    end
+
+    subgraph Database_Tradeoffs
+        MongoDB -->  Tradeoff_1;
+        HBase --> Tradeoff_1;
+        Redis -->  Tradeoff_1;
+        CouchDB -->  Tradeoff_2;
+        Cassandra -->  Tradeoff_2;
+        Dynamo -->  Tradeoff_2;
+        Hadoop -->  Tradeoff_2;
+        Riak -->  Tradeoff_2;
+    end
+
+    subgraph Consistency_Tradeoffs
+        Tradeoff_1[Trade off availability for linearizability] --> |MongoDB, HBase, Redis| Consistency_Tradeoff_1;
+        Tradeoff_2[Trade off linearizability for availability] --> |CouchDB, Cassandra, Dynamo, Hadoop, Riak| Consistency_Tradeoff_2;
+    end

@@ -1,0 +1,27 @@
+graph LR;
+
+    subgraph ACID_vs_CAP
+        ACID[ACID Consistency] -->|Focuses on data relationships like foreign keys and uniqueness| RDBMS;
+        CAP[CAP Consistency :Linearizability] --> |All nodes contain same data at a moment| Linearizability;
+    end
+
+    subgraph Techniques_Linearizability
+        Full_mesh --> |Fully connected network of nodes| Linearizability;
+        Quorum --> |Consensus among a subset of nodes| Linearizability;
+    end
+
+    subgraph Techniques_Eventual_Consistency
+        Event_sourcing --> |Handle traffic spikes| Eventual_Consistency;
+        Coordination_service --> |Write to single location, propagate to others| Eventual_Consistency;
+        Distributed_cache --> |Write to single location, propagate to others| Eventual_Consistency;
+    end
+
+    subgraph Techniques_Evenutal_Consistency_Tradeoff
+        Gossip_protocol --> |Trade-off consistency for lower cost| Eventual_Consistency_Tradeoff;
+        Random_leader_selection --> |Trade-off consistency for lower cost| Eventual_Consistency_Tradeoff;
+    end
+
+    subgraph Disadvantages_Linearizability
+        Lower_availability --> |Most or all nodes must reach consensus| Linearizability_Disadvantages;
+        Complex_expensive --> |Becomes complex and expensive with larger node count| Linearizability_Disadvantages;
+    end
