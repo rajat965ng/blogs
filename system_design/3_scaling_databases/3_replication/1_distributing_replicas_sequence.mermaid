@@ -1,0 +1,13 @@
+sequenceDiagram
+    participant TypicalDesign
+    participant Sharding
+    participant HDFS
+    participant ReadOperations
+
+    Note over TypicalDesign: Backup strategy
+    TypicalDesign->>TypicalDesign: One backup on same rack<br/>One backup on different rack/data center
+    Note over Sharding: Sharding benefits
+    Sharding->>Sharding: Scale storage, memory,<br/>processing, and locality
+    Note over HDFS: Linearizability implementation
+    HDFS->>HDFS: Implement deletion as<br/>append operation (logical soft delete)
+    HDFS->>ReadOperations: Prevent disruptions and inconsistency<br/>to read operations

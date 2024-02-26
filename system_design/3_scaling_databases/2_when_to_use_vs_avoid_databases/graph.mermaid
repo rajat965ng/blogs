@@ -1,0 +1,22 @@
+graph TD;
+    Start((Start)) --> Decide[Decide storage method]
+    Decide --> Database[Discuss using a database]
+    Database --> Config[Check special settings]
+    Config -->|Special settings required| Configure[Configure settings]
+    Config -->|No special settings required| Continue[Continue]
+    Database --> Filesystem[Discuss using filesystem]
+    Filesystem -->|Object size decision| DecideSize[Determine object size]
+    DecideSize -->|Objects smaller than 256K| StoreDatabase[Store in a database]
+    DecideSize -->|Objects larger than 1M| StoreFilesystem[Store in the filesystem]
+    DecideSize -->|Objects between 256K and 1M| ConsiderFactors[Consider read:write ratio and overwrite rate]
+    ConsiderFactors -->|Discuss special settings| SQLServer[Discuss SQL Server settings]
+    SQLServer -->|Special settings required| ConfigSQL[Configure SQL Server settings]
+    SQLServer -->|No special settings required| ContinueSQL[Continue]
+    Continue --> DiscussInefficiency[Discuss database inefficiency]
+    DiscussInefficiency --> Memory[Database objects loaded into memory]
+    ContinueSQL --> DiscussInefficiency
+    DiscussInefficiency --> Replication[Discuss replication issues]
+    Replication --> SlowReplication[Replication will be slow]
+    SlowReplication -->|Large objects| ReplicateLarge[Replicate large objects]
+    ReplicateLarge --> LeaderFollower[Replicate from leader node to follower nodes]
+    LeaderFollower --> End((End))

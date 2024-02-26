@@ -1,0 +1,40 @@
+sequenceDiagram
+    participant MultiLeader
+    participant Leaderless
+    participant RaceConditions
+    participant MultiLeaderReplication
+    participant ConsistencyProblems
+    participant EventualConsistency
+
+    Note over MultiLeader, Leaderless: Techniques for scaling writes and storage size
+    MultiLeader->>RaceConditions: Handle race conditions
+    Leaderless->>RaceConditions: Handle race conditions
+
+    Note over MultiLeader: Multiple nodes designated as leaders
+    MultiLeader->>MultiLeaderReplication: Multiple leaders replicate writes
+
+    Note over MultiLeaderReplication: Replication introduces consistency and race conditions
+    MultiLeaderReplication->>ConsistencyProblems: Consistency and race conditions
+    MultiLeaderReplication->>ConsistencyProblems: Sequence matters in operations
+
+    Note over ConsistencyProblems: Problems related to consistency
+    ConsistencyProblems->>EventualConsistency: Accept eventual consistency
+    ConsistencyProblems->>EventualConsistency: Ensure data is valid for each user
+
+    Note over ConsistencyProblems: Read-after-write consistency
+    ConsistencyProblems->>EventualConsistency: Read-after-write consistency
+
+    Note over ConsistencyProblems: Relaxing consistency requirements
+    ConsistencyProblems->>EventualConsistency: Relax consistency requirements
+    ConsistencyProblems->>EventualConsistency: Minimize data to be consistent
+
+    Note over ConsistencyProblems: Handling race conditions
+    ConsistencyProblems->>EventualConsistency: Race condition scenarios
+
+    Note over ConsistencyProblems: Possible situations
+    ConsistencyProblems->>EventualConsistency: DELETE and INSERT same row
+    ConsistencyProblems->>EventualConsistency: Two UPDATE operations on same cell
+
+    Note over ConsistencyProblems: Suggested approaches
+    ConsistencyProblems->>EventualConsistency: Prioritize DELETE over INSERT/UPDATE
+    ConsistencyProblems->>EventualConsistency: Randomly break ties for other queries

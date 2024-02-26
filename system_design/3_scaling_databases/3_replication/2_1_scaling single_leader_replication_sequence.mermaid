@@ -1,0 +1,46 @@
+sequenceDiagram
+    participant Database
+    participant Application
+    participant Metadata
+
+    Note over Database: Manually entered strings increase database size
+    Database->>Database: Slow increase in size
+
+    Note over Database: Possible data partitioning
+    Database->>Database: Divide data between multiple databases
+
+    Note over Database: Configuring service to connect to multiple databases
+    Application->>Database: Configure connection to multiple databases
+
+    Note over Application: Rewriting SQL queries
+    Application->>Application: Rewrite SQL queries to query from appropriate database
+
+    Note over Application: Querying multiple databases
+    Application->>Database: Query from multiple databases
+
+    Note over Application: Combining results
+    Database->>Application: Combine query results
+
+    Note over Application: Metadata management
+    Application->>Metadata: Store metadata to track data location
+
+    Note over Application: Multi-leader replication
+    Application->>Application: Multi-leader replication with metadata management
+
+    Note over Application: Increased complexity
+    Application->>Application: More difficult to maintain
+
+    Note over Application: Example scenario
+    Application->>Database: Partition data across multiple databases
+
+    Note over Database: Partitioning by day
+    Database->>Database: Create new table daily
+
+    Note over Database: Naming convention
+    Database->>Database: Name tables in format: fact_searches_YYYY_MM_DD
+
+    Note over Application: Handling complex scenarios
+    Application->>Database: Create tables for specific customers or apps
+
+    Note over Database: Example table creation
+    Database->>Database: Create tables based on specific criteria

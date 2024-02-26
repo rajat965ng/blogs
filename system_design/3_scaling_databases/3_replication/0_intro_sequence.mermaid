@@ -1,0 +1,30 @@
+sequenceDiagram
+    participant DecisionMaker
+    participant Database
+    participant Nodes
+    participant DataCenters
+    participant FailoverProcess
+    participant ScalingProcess
+
+    Note over DecisionMaker: Scale database
+    DecisionMaker->>Database: Scale database
+    Database->>Nodes: Implement distributed database
+    Database->>Replication: Replication
+    Replication->>Nodes: Make copies of data (replicas)
+    Replication->>Nodes: Store replicas on different nodes
+    Database->>Partitioning: Partitioning
+    Partitioning->>Nodes: Divide data into subsets
+    Partitioning->>Nodes: Distribute subsets
+    Database->>Sharding: Sharding
+    Sharding->>Nodes: Distribute subsets across multiple nodes
+    Nodes->>FailoverProcess: Implement failover process
+    FailoverProcess->>Nodes: Define failover process
+    FailoverProcess->>Nodes: Take over roles and partitions/shards of failed nodes
+    Nodes->>ScalingProcess: Scale nodes
+    ScalingProcess->>Nodes: Vertically scale nodes
+    Nodes->>Nodes: Back up data within and across data centers
+    Nodes->>Database: Increase storage capacity
+    Nodes->>Database: Increase throughput
+    Nodes->>Database: Decrease latency
+    Database->>Nodes: Distribute replicas geographically
+    Database->>Nodes: Increase number of replicas

@@ -1,0 +1,34 @@
+sequenceDiagram
+    participant Nodes
+    participant QuorumConcept
+    participant Database
+    participant Consistency
+    participant Examples
+
+    Note over Nodes: Leaderless replication\nAll nodes are equal
+    Nodes->>Database: Reads and writes on any node
+
+    Note over QuorumConcept: Handling race conditions
+    QuorumConcept->>Nodes: Introduce quorum
+    Nodes->>QuorumConcept: Minimum nodes for consensus
+    QuorumConcept->>Database: Quorum definition
+    Database->>QuorumConcept: Guarantee consistency
+
+    Note over Consistency: Choosing between fast writes and fast reads
+    Consistency->>QuorumConcept: Trade-off between writes and reads
+    QuorumConcept->>Database: Fast writes or fast reads
+    Database->>QuorumConcept: Eventual consistency if no choice
+
+    Note over Examples: Databases using leaderless replication
+    Database->>Examples: Examples of databases
+    Examples->>Database: Cassandra, Dynamo, Riak, Voldemort
+
+
+    Note over Examples: Race conditions and implementations
+    Examples->>Database: Race conditions in Cassandra
+    Database->>Database: UPDATE operations
+    Database->>Database: DELETE operations with tombstones
+
+    Note over Examples: HDFS replication
+    Examples->>Database: Reads and replication based on rack locality
+    Database->>Database: All replicas are equal

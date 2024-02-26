@@ -1,0 +1,34 @@
+graph TD;
+    Start((Start)) --> LeaderlessReplication[Leaderless replication]
+    LeaderlessReplication --> EqualNodes[All nodes are equal]
+    EqualNodes --> ReadWriteAnyNode[Reads and writes on any node]
+
+    subgraph RaceConditionHandling
+        ReadWriteAnyNode --> RaceConditions[Race condition handling]
+        RaceConditions --> IntroduceQuorum[Introduce quorum]
+        IntroduceQuorum --> Quorum[Quorum definition]
+        Quorum -->|Minimum nodes for consensus| Consensus[Minimum nodes for consensus]
+        Consensus --> GuaranteeConsistency[Guarantee consistency]
+        GuaranteeConsistency -->|Trade-off between writes and reads| Tradeoff[Trade-off between writes and reads]
+        Tradeoff -->|Fast writes| FastWrites[Fast writes]
+        Tradeoff -->|Fast reads| FastReads[Fast reads]
+        Tradeoff -->|Eventual consistency| EventualConsistency[Eventual consistency]
+    end
+
+    subgraph References
+        LeaderlessReplication --> Examples[Databases using leaderless replication]
+        Examples --> Cassandra[Cassandra]
+        Examples --> Dynamo[Dynamo]
+        Examples --> Riak[Riak]
+        Examples --> Voldemort[Voldemort]
+        Cassandra -->|Race conditions in UPDATE operations| UpdateRaceConditions[Race conditions in UPDATE operations]
+        UpdateRaceConditions -->|Use of tombstones| Tombstones[Tombstones for DELETE operations]
+        Riak -->|Equal replicas| EqualReplicas[Equal replicas]
+        Voldemort -->|Equal replicas| EqualReplicas
+    end
+
+    subgraph FileSystem
+        LeaderlessReplication --> HDFS[HDFS]
+        HDFS --> RackLocality[Rack locality for reads and replication]
+        RackLocality --> EqualReplicas[Equal replicas]
+    end

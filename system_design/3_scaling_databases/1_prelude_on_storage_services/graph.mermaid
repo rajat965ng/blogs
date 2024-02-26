@@ -1,0 +1,13 @@
+graph TD;
+    A[Storage Services] -->|Stateful Services| B[Database]
+    B -->|not have all SQL properties| C[NoSQL]
+    B -->|Cassandra, HBase| D[Column-oriented]
+    B --> E[Key-value]
+    A -->|MongoDB| F[Document]
+    A -->|Neo4j, RedisGraph, and Amazon Neptune| G[Graph]
+    A -->|HDFS| H[File Storage]
+    A -->|SAN, iSCSI, and local disks| I[Block Storage]
+    A -->|AWS S3| M[Object Storage]
+    B -->|SQL| J[ACID Properties]
+    E -->|Memcached,Redis| K[Cache]
+    F -->|Text, JSON, YAML| L[Values]

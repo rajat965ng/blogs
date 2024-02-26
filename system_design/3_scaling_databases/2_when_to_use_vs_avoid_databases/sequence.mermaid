@@ -1,0 +1,33 @@
+sequenceDiagram
+    participant DecisionMaker
+    participant Database
+    participant Filesystem
+    participant SQLServer
+    participant Memory
+    participant Replication
+
+    Note over DecisionMaker: Decide storage method
+    DecisionMaker->>Database: Discuss using a database
+    alt Object_Size_Decision
+        Note over DecisionMaker: Determine object size
+        opt Objects_Smaller_Than_256K
+            Database-->>DecisionMaker: Store in a database
+        end
+        opt Objects_Larger_Than_1M
+            Filesystem-->>DecisionMaker: Store in the filesystem
+        end
+        opt Objects_Between_256K_and_1M
+            Note over DecisionMaker: Consider read:write ratio and overwrite rate
+            Database-->>DecisionMaker: Consider read:write ratio and overwrite rate
+        end
+    end
+
+    DecisionMaker->>SQLServer: Discuss special settings
+    SQLServer-->>DecisionMaker: Special settings required for files > 2 GB
+
+    DecisionMaker->>Memory: Discuss database inefficiency
+    Memory-->>DecisionMaker: Database objects loaded into memory
+
+    DecisionMaker->>Replication: Discuss replication issues
+    Replication-->>DecisionMaker: Slow replication with large objects
+

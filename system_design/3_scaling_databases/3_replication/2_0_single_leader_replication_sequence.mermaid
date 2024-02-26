@@ -1,0 +1,60 @@
+sequenceDiagram
+    participant LeaderNode
+    participant Followers
+    participant FailoverProcess
+    participant MultiLevelReplication
+
+    Note over LeaderNode: Single-leader replication
+    LeaderNode->>LeaderNode: Write operations
+    LeaderNode->>LeaderNode: Scaling reads
+
+    Note over LeaderNode: Configurations
+    LeaderNode->>LeaderNode: MySQL/Postgres configurations
+
+    Note over LeaderNode: ACID consistency
+    LeaderNode->>LeaderNode: Loss of ACID consistency
+
+    Note over LeaderNode: Horizontal scaling
+    LeaderNode->>LeaderNode: Horizontal scaling consideration
+
+    Note over LeaderNode: Write replication
+    LeaderNode->>Followers: Replicate writes to followers
+
+    Note over LeaderNode: Failover process
+    LeaderNode->>FailoverProcess: Failover process
+
+    Note over FailoverProcess: Promote secondary leader
+    FailoverProcess->>Followers: Promote secondary leader to primary
+
+    Note over FailoverProcess: Restore failed leader
+    FailoverProcess->>Followers: Restore failed leader as secondary
+
+    Note over LeaderNode: Maximum throughput
+    LeaderNode->>Followers: Shared throughput
+
+    Note over LeaderNode: Limit read scalability
+    LeaderNode->>Followers: Limit on number of followers
+
+    Note over LeaderNode: Multi-level replication
+    LeaderNode->>MultiLevelReplication: Multi-level replication
+
+    Note over MultiLevelReplication: Pyramid structure
+    MultiLevelReplication->>Followers: Replication levels
+
+    Note over MultiLevelReplication: Consistency tradeoff
+    MultiLevelReplication->>Followers: Delayed consistency tradeoff
+
+    Note over LeaderNode: Implementation simplicity
+    LeaderNode->>LeaderNode: Simplest to implement
+
+    Note over LeaderNode: Limitations
+    LeaderNode->>LeaderNode: Limitations
+
+    Note over LeaderNode: Database size limitation
+    LeaderNode->>LeaderNode: Entire database must fit into a single host
+
+    Note over LeaderNode: Eventual consistency
+    LeaderNode->>LeaderNode: Eventual consistency due to write replication time
+
+    Note over LeaderNode: Example
+    LeaderNode->>LeaderNode: MySQL binlog-based replication

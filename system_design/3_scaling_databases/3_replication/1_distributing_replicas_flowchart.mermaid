@@ -1,0 +1,22 @@
+graph TD;
+    Start((Start)) --> Backup[Backup strategy]
+    Backup --> SameRack[Backup onto host on same rack]
+    Backup --> DiffRackDataCenter[Backup onto host on different rack/data center]
+    SameRack -->|Typical design| Sharding[Sharding]
+    DiffRackDataCenter -->|Typical design| Sharding
+    Sharding --> ScaleStorage[Scale storage]
+    Sharding --> ScaleMemory[Scale memory]
+    Sharding --> ScaleProcessing[Scale processing]
+    Sharding --> Locality[Locality]
+    ScaleStorage -->|Database/table too big| ShardedDB[Sharded database]
+    ScaleMemory -->|Database stored in memory| ShardedDB
+    ShardedDB -->|Use parallel processing| ParallelProcessing[Parallel processing]
+    ShardedDB -->|Locally stored data| LocalData[Locality]
+    ScaleMemory --> ScaleVertical[Vertical scaling of memory]
+    ScaleVertical --> Expensive[Monetarily expensive]
+    ScaleVertical --> ShardedDB
+    ParallelProcessing --> Linearizability[Linearizability]
+    Linearizability --> HDFS[HDFS]
+    HDFS --> SoftDelete[Deletion as an append operation]
+    SoftDelete --> Tombstone[Tombstone]
+    Tombstone --> ReadOperations[Read operations]

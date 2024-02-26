@@ -1,0 +1,35 @@
+graph TD;
+    Start((Start)) --> Techniques[Multi-leader and leaderless replication]
+    Techniques --> ScaleWrites[Scale writes and storage size]
+    ScaleWrites --> HandleRaceConditions[Handle race conditions]
+    HandleRaceConditions -->|Not present| SingleLeaderReplication[Single-leader replication]
+
+    subgraph MultiLeaderReplication
+        HandleRaceConditions --> MultiLeader[Multi-leader replication]
+        MultiLeader -->|Multiple nodes designated as leaders| ReplicateWrites[Replicate writes]
+        ReplicateWrites -->|Introduce consistency and race conditions| ConsistencyRaceConditions[Consistency and race conditions]
+    end
+
+    HandleRaceConditions -->|Clock synchronization issues| ClockSkew[Clock skew]
+
+    subgraph Consistency
+        ConsistencyRaceConditions --> DatabaseConsistency[Database consistency]
+        DatabaseConsistency -->|Maintain database invariants| MaintainInvariants[Maintain database invariants]
+        MaintainInvariants -->|Same results on N replicas| SameQueryResults[Same query results]
+        MaintainInvariants -->|Execute in sequence| ExecuteInSequence[Execute queries in sequence]
+    end
+
+
+    subgraph ReadAfterWriteConsistency
+        DatabaseConsistency --> ReadAfterWrite[Read-after-write consistency]
+        ReadAfterWrite --> RelaxConsistency[Relax consistency requirements]
+        RelaxConsistency -->|Minimize data consistency| MinimizeData[Minimize data consistency]
+    end
+
+    subgraph RaceConditionSituations
+        HandleRaceConditions --> RaceConditionScenarios[Race condition scenarios]
+        RaceConditionScenarios -->|DELETE and INSERT| DeleteInsert[DELETE and INSERT]
+        RaceConditionScenarios -->|Two UPDATE operations| UpdateOperations[Two UPDATE operations]
+        UpdateOperations -->|Priority for DELETE| PriorityDelete[Priority for DELETE]
+        UpdateOperations -->|Random tie-breaker| RandomTieBreaker[Random tie-breaker]
+    end
