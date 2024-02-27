@@ -1,0 +1,31 @@
+sequenceDiagram
+    participant Aggregation
+    participant SingleTierAggregation
+    participant MultiTierAggregation
+    participant CountingValues
+    participant EventDistribution
+    participant HostAggregation
+    participant ReductionOfHosts
+    participant DatabaseWrites
+    participant Tradeoffs
+    participant EventualConsistency
+    participant IncreasedComplexity
+    participant Latency
+    participant ReplicationLoggingMonitoringAlerting
+
+    Aggregation ->> SingleTierAggregation: Choose aggregation type
+    Aggregation ->> MultiTierAggregation: Choose aggregation type
+
+    SingleTierAggregation ->> CountingValues: Counting numbers of values
+
+    MultiTierAggregation ->> CountingValues: Counting numbers of values
+    CountingValues ->> EventDistribution: Distribute events across hosts
+    EventDistribution ->> HostAggregation: Aggregate events
+    HostAggregation ->> ReductionOfHosts: Reduce hosts in each layer
+    ReductionOfHosts ->> DatabaseWrites: Write to database
+
+    Aggregation ->> Tradeoffs: Consider tradeoffs
+    Tradeoffs ->> EventualConsistency: Evaluate eventual consistency
+    Tradeoffs ->> IncreasedComplexity: Evaluate increased complexity
+    IncreasedComplexity ->> Latency: Add latency to pipeline
+    IncreasedComplexity ->> ReplicationLoggingMonitoringAlerting: Implement additional complexity

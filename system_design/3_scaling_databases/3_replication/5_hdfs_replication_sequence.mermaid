@@ -1,0 +1,22 @@
+sequenceDiagram
+    participant Client
+    participant NameNode
+    participant DataNodes
+    participant Admins
+    participant Hive
+    participant Hadoop
+
+    Client->>NameNode: File system namespace operations\n(opening, closing, renaming)
+    NameNode->>DataNodes: Mapping of blocks to DataNodes
+    DataNodes->>NameNode: Block creation, deletion, and replication
+    NameNode->>Client: Response to file system operations
+
+    Note over NameNode,DataNodes: User data never flows through NameNode
+
+    Client->>Hive: Partitioning tables
+    Hive->>Client: Efficient filter queries
+    Client->>Admins: Set block size
+    Admins->>Admins: Set default block size (64 MB)
+
+    Note over Hadoop: Framework for storing and processing distributed data
+    Client->>Hadoop: Store and process distributed data

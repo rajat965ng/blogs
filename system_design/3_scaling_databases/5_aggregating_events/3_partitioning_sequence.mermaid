@@ -1,0 +1,20 @@
+sequenceDiagram
+    participant Load_Balancer
+    participant Hosts
+    participant Aggregation
+    participant Max_Heap_Host
+
+    Note over Load_Balancer: Partitioning requires a level 7 load balancer
+    Load_Balancer->>Hosts: Forward Events
+    Note over Load_Balancer: Load balancer forwards events based on their values
+
+    alt Events A-I
+        Hosts->>Aggregation: Forward Events A-I
+    else Events J-R
+        Hosts->>Aggregation: Forward Events J-R
+    else Events S-Z
+        Hosts->>Aggregation: Forward Events S-Z
+    end
+
+    Aggregation->>Max_Heap_Host: Send Hash Table
+    Note over Max_Heap_Host: Construct Final Max-Heap

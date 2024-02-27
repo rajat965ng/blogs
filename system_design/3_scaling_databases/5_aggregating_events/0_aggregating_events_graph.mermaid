@@ -1,0 +1,17 @@
+graph TD;
+    A[Database Writes] -->|Difficult and expensive| B[Try to reduce rate of database writes];
+    B -->|Common techniques| C[Sampling and aggregation];
+    C -->|Slower database size growth| D[Added bonus];
+    B -->|Reduce database reads| E[Techniques such as caching and approximation];
+    E -->|Algorithm| F[Count-min sketch];
+    E -->|Sampling data| G[Consider only certain data points];
+    G -->|Sampling strategies| H[Sampling every nth data point or random sampling];
+    F -->|Write at lower rate| I[Sampling in writes];
+    C -->|Combining multiple events| J[Aggregating events];
+    J -->|Single database write| K[Instead of multiple writes];
+    J -->|Implemented using streaming pipeline| L[Aggregation using streaming pipeline];
+    L -->|First stage| M[Receives high rate of events];
+    M -->|Requires large cluster| N[Thousands of hosts];
+    N -->|Aggregation allows fewer hosts| O[Each succeeding stage];
+    O -->|Use replication and checkpointing| P[In case hosts fail];
+    P -->|Ensure replication| Q[Distributed transaction algorithm like Saga or quorum writes];

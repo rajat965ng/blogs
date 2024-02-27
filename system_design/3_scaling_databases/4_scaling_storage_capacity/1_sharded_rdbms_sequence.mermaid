@@ -1,0 +1,24 @@
+sequenceDiagram
+    participant App as Application
+    participant DB as Database
+    participant Node1 as Node 1
+    participant Node2 as Node 2
+    participant Node3 as Node 3
+
+    App ->> DB: JOIN query
+    DB -->> Node1: Request JOIN operation
+    Node1 -->> Node2: Request JOIN operation
+    Node2 -->> Node3: Request JOIN operation
+    Node3 -->> DB: Request JOIN operation
+    DB -->> App: JOIN result
+
+    App ->> DB: Aggregation query
+    DB -->> Node1: Request aggregation operation
+    Node1 -->> App: Return aggregated values
+
+    App ->> DB: Aggregation query (median/percentile)
+    DB -->> Node1: Request aggregation operation
+    Node1 -->> Node2: Request aggregation operation
+    Node2 -->> Node3: Request aggregation operation
+    Node3 -->> DB: Request aggregation operation
+    DB -->> App: Return aggregated values

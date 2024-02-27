@@ -1,0 +1,16 @@
+sequenceDiagram
+    participant LB as Load Balancer
+    participant H1 as Host 1
+    participant H2 as Host 2
+    participant H3 as Host 3
+    LB->>H1: Event Distribution
+    LB->>H2: Event Distribution
+    LB->>H3: Event Distribution
+    loop Aggregation Process
+        H1->>H1: Aggregate Counts
+        H2->>H2: Aggregate Counts
+        H3->>H3: Aggregate Counts
+    end
+    H1->>H1: Flush Counts to Database
+    H2->>H2: Flush Counts to Database
+    H3->>H3: Flush Counts to Database

@@ -1,0 +1,17 @@
+graph TD;
+    A[Start] --> B[Aggregation Process]
+    B --> C[Load Balancer]
+    C --> D[Host 1]
+    C --> E[Host 2]
+    C --> F[Host 3]
+    D --> G[Hash Table]
+    E --> G
+    F --> G
+    G --> H[Flush Counts to Database]
+    H --> I{Memory Usage}
+    I -->|Low| G
+    I -->|High| J[Flush Counts to Database]
+    J --> H
+    I -->|High| K[Periodic Flush]
+    K --> H
+    K -->|Low| G

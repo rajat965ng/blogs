@@ -1,0 +1,14 @@
+graph TD;
+    Start((Start)) --> DatabaseSize[Database size exceeds single host capacity?]
+    DatabaseSize -- Yes --> DeleteRows[Delete old rows]
+    DeleteRows --> RetainData[Need to retain old data?]
+    RetainData -- Yes --> StoreInSharded[Store old data in sharded storage]
+    StoreInSharded --> HDFS[HDFS or Cassandra]
+    HDFS -->|Horizontally scalable| Scalable[Supports infinite storage capacity]
+    Scalable -->|Example| ExampleCluster[Production HDFS clusters with over 100 PB]
+    ExampleCluster -->|Theoretical| TheoreticalCluster[Cluster capacity of YB]
+    TheoreticalCluster --> Cost[Monetary cost prohibitive?]
+    Cost -- No --> End((End))
+    RetainData -- No --> StoreInConsumer[Store data in consumer's devices or browser]
+    StoreInConsumer --> FrontendProcessing[Process data on frontend]
+    FrontendProcessing -->|Not backend| End((End))

@@ -1,0 +1,18 @@
+graph TD;
+    Start((Start)) --> UseRDBMS[Need to use an RDBMS?]
+    UseRDBMS -- Yes --> ExceedSingleNode[Amount of data exceeds single node capacity?]
+    ExceedSingleNode -- Yes --> UseShardedRDBMS[Use sharded RDBMS solution like Amazon RDS]
+    UseShardedRDBMS --> Limitations[Imposes limitations on SQL operations]
+    Limitations --> JoinQueries[JOIN queries will be much slower]
+    JoinQueries --> ShardKeys[JOIN on columns used as shard keys?]
+    ShardKeys -- Yes --> EfficientJoin[JOIN will be more efficient]
+    ShardKeys -- No --> InefficientJoin[JOIN will involve considerable network traffic]
+    Limitations --> AggregationOperations[Aggregation operations will involve both the database and application]
+    AggregationOperations --> EasyOperations[Some aggregation operations will be easier e.g., sum, mean]
+    AggregationOperations --> ComplexOperations[Some aggregation operations will be more complicated and slower e.g., median, percentile]
+    InefficientJoin -->|Consider sharding| ShardKeys
+    EfficientJoin -->|Proceed with JOIN| End((End))
+    EasyOperations -->|Proceed with simple arithmetic| End
+    ComplexOperations -->|More complicated and slower| End
+    ExceedSingleNode -- No --> End
+    UseRDBMS -- No --> End

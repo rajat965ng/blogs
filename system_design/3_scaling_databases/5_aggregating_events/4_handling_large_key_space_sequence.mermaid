@@ -1,0 +1,20 @@
+sequenceDiagram
+    participant A as Key_Space
+    participant B as Practical_Implementation
+    participant C as Ensure_Combined_Key_Spaces
+    participant D as Limit_Key_Space
+    participant E as Flush_Frequently
+    participant F as Simple_Aggregation_Service
+    participant G as Provision_Hosts
+
+    A->>B: Illustrate tiny key space
+    B->>C: Yes
+    C->>D: Ensure no memory overflow
+    D->>E: Limit key space
+    E->>F: Flush more frequently
+    B->>F: No
+    F->>C: Ensure no memory overflow
+    C->>D: Limit key space
+    D->>E: Flush more frequently
+    E->>F: Simple aggregation service
+    F->>G: Provision hosts

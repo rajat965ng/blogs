@@ -1,0 +1,12 @@
+graph TD;
+    A[Key Space] --> B{Practical Implementation?}
+    B -->|Yes| C(Ensure combined key spaces do not cause memory overflow)
+    C --> D[Limit key space in earlier levels]
+    D --> E[Flush more frequently]
+    B -->|No| F[Illustrate tiny key space]
+    F --> G[Ensure combined key spaces do not cause memory overflow]
+    G --> H[Limit key space in earlier levels]
+    H --> I[Flush more frequently]
+    I --> J[Simple aggregation service with two levels]
+    J --> K[Provision hosts with less memory for earlier levels]
+    K --> L[Provision hosts with more memory for later levels]

@@ -1,0 +1,47 @@
+sequenceDiagram
+    participant App as Application
+    participant DB as Database
+    participant S as Sampling
+    participant A as Aggregation
+    participant SP as Streaming Pipeline
+    participant R as Replication
+    participant CT as Checkpointing
+    participant DT as Distributed Transaction
+
+    App->>DB: Database writes
+    Note over DB: Difficult and expensive to scale
+
+    Note right of DB: Try to reduce write rate
+
+    DB->>S: Sampling and aggregation
+    Note over S: Reduce write rate
+
+    Note right of DB: Slower database size growth
+
+    DB->>S: Techniques such as caching and approximation
+    Note over S: Reduce read rate
+
+    Note right of DB: Count-min sketch
+    Note over DB: Algorithm for frequency table
+
+    Note right of DB: Sampling data
+    Note over DB: Consider only certain data points
+
+    Note right of DB: Sampling strategies
+    Note over DB: Sampling every nth data point or random sampling
+
+    Note right of DB: Sampling in writes
+    Note over DB: Write data at lower rate
+
+    DB->>A: Aggregating events
+    Note over A: Combine events into single event
+
+    DB->>SP: Aggregation using streaming pipeline
+    Note over SP: Reduce cluster size
+
+    DB->>R: Replication
+    DB->>CT: Checkpointing
+    Note right of DB: In case hosts fail
+
+    DB->>DT: Distributed Transaction
+    Note over DT: Ensure replication

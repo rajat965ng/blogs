@@ -1,0 +1,48 @@
+graph LR
+    subgraph Partitioning
+        A[Level 7 Load Balancer]
+    end
+
+    subgraph Forwarding Events
+        B[Events A-I]
+        C[Events J-R]
+        D[Events S-Z]
+    end
+
+    subgraph Aggregation
+        E[First Layer of Hosts]
+        F[Second Layer of Hosts]
+        G[Final Hash Table Host]
+        H[Max-Heap Host]
+    end
+
+    subgraph Traffic Distribution
+        I[Partition A-I]
+        J[Partition J-R]
+        K[Partition S-Z]
+    end
+
+    subgraph Partition Decisions
+        L{Uneven Traffic}
+        M{Different Hosts}
+        N{Adjust Partitions}
+    end
+
+    A --> B
+    A --> C
+    A --> D
+    B --> E
+    C --> E
+    D --> E
+    E --> F
+    F --> G
+    G --> H
+    L --> I
+    L --> J
+    L --> K
+    M --> I
+    M --> J
+    M --> K
+    N --> I
+    N --> J
+    N --> K

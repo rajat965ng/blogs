@@ -1,0 +1,26 @@
+sequenceDiagram
+    participant Host
+    participant Checkpointing
+    participant DeadLetterQueues
+    participant StatelessNodes
+    participant LoadBalancingService
+    participant RedisCluster
+
+    Host ->> Checkpointing: Host goes down
+    Checkpointing ->> Host: Loss of aggregated events
+    Host ->> DeadLetterQueues: Loss of aggregated events
+    DeadLetterQueues ->> Host: Cascading failure
+    Host ->> StatelessNodes: Cascading failure
+    StatelessNodes ->> Host: Earlier hosts may overflow
+    Host ->> Checkpointing: Aggregated events lost
+    Checkpointing ->> Host: Processing repeated
+    Checkpointing ->> Host: Waste of resources
+    Checkpointing ->> Host: Considerable latency
+    Host ->> StatelessNodes: Convert each node into independent service
+    StatelessNodes ->> RedisCluster: Cluster of stateless nodes
+    StatelessNodes ->> LoadBalancingService: Multiple hosts
+    LoadBalancingService ->> StatelessNodes: Spread requests across hosts
+    StatelessNodes ->> RedisCluster: Separate Redis cluster
+    RedisCluster ->> RedisCluster: No competition for writing
+    RedisCluster ->> RedisCluster: Aggregated events deleted after flush
+    RedisCluster ->> RedisCluster: Controlled database size

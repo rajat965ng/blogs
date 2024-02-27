@@ -1,0 +1,22 @@
+sequenceDiagram
+    participant Client
+    participant Backend
+    participant ShardedStorage
+    participant Frontend
+
+    Client->>Backend: Database size exceeds single host capacity?
+    Backend-->>Client: Yes
+    Client->>Backend: Delete old rows
+    Backend-->>Client: Need to retain old data?
+    Client->>Backend: Yes
+    Backend-->>Client: Store old data in sharded storage
+    Client->>ShardedStorage: Choose sharded storage (e.g., HDFS or Cassandra)
+    ShardedStorage-->>Client: Sharded storage is horizontally scalable
+    ShardedStorage-->>Client: Supports infinite storage capacity by adding more hosts
+    ShardedStorage-->>Client: Example: Production HDFS clusters with over 100 PB
+    ShardedStorage-->>Client: Theoretical: Cluster capacity of YB
+    ShardedStorage-->>Client: Monetary cost prohibitive?
+    Client->>Backend: No
+    Backend-->>Client: Store data in consumer's devices or browser
+    Backend->>Frontend: Data stored in consumer's devices or browser
+    Frontend-->>Backend: Processing of data on frontend

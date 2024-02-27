@@ -1,0 +1,17 @@
+graph TD
+    A[Aggregation] --> B[Single-tier Aggregation]
+    A --> C[Multi-tier Aggregation]
+    B --> D[Counting values]
+    C --> D
+
+    D --> E[Event: A, B, C, ...]
+    E --> F[Even distribution across hosts]
+    F --> G[Aggregation at each host]
+    G --> H[Reduction of hosts in each layer]
+    H --> I[Database writes]
+
+    A --> J[Tradeoffs]
+    J --> K[Eventual consistency]
+    J --> L[Increased complexity]
+    L --> M[Latency]
+    L --> N[Complexity in replication, logging, monitoring, and alerting]
