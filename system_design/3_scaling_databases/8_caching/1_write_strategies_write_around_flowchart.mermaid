@@ -1,0 +1,12 @@
+graph TD;
+
+    start[Start] --> writeDatabase[Write data to database];
+    writeDatabase --> checkCacheMiss;
+    checkCacheMiss{Cache miss?} -- Yes --> updateCache[Update cache];
+    checkCacheMiss -- No --> finish[Finish];
+
+    subgraph Description
+        start --> writeAround[Write-around: Application writes only to database];
+        writeAround --> combinedWith[Combined with cache-aside or read-through];
+        combinedWith --> updateCacheOnMiss[Application updates cache on cache miss];
+    end

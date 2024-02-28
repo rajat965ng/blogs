@@ -1,0 +1,44 @@
+flowchart LR
+
+    subgraph "Lambda Architecture"
+        lambda["Lambda Architecture"]
+        batch_pipeline["Batch Pipeline"]
+        streaming_pipeline["Streaming Pipeline"]
+        fast_pipeline["Fast Pipeline"]
+        slow_pipeline["Slow Pipeline"]
+    end
+
+    subgraph "Fast Pipeline Techniques"
+        approximation["Approximation Algorithms"]
+        in_memory_db["In-memory Databases"]
+        no_replication["No Data Replication"]
+    end
+
+    subgraph "Slow Pipeline Technologies"
+        mapreduce_db["MapReduce Databases"]
+    end
+
+    subgraph "Kappa Architecture"
+        kappa["Kappa Architecture"]
+        single_stack["Single Technology Stack"]
+        kafka["Append-only Immutable Log (Kafka)"]
+        stream_processing["Stream Processing"]
+        database["Database"]
+    end
+
+    lambda --> batch_pipeline
+    lambda --> streaming_pipeline
+
+    streaming_pipeline --> fast_pipeline
+    streaming_pipeline --> slow_pipeline
+
+    fast_pipeline --> approximation
+    fast_pipeline --> in_memory_db
+    fast_pipeline --> no_replication
+
+    slow_pipeline --> mapreduce_db
+
+    kappa --> single_stack
+    kappa --> kafka
+    kappa --> stream_processing
+    kappa --> database

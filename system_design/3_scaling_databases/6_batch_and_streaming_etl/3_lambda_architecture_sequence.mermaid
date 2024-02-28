@@ -1,0 +1,26 @@
+sequenceDiagram
+    participant LambdaArchitecture
+    participant FastPipeline
+    participant SlowPipeline
+    participant KappaArchitecture
+    participant Kafka
+    participant StreamProcessing
+    participant Database
+
+    Note over LambdaArchitecture: Lambda Architecture Overview
+
+    LambdaArchitecture->>FastPipeline: Fast Pipeline
+    LambdaArchitecture->>SlowPipeline: Slow Pipeline
+
+    Note over FastPipeline: Fast Pipeline Details
+    FastPipeline->>Kafka: Uses Kafka
+    FastPipeline->>StreamProcessing: Stream Processing
+    FastPipeline->>Database: Storage
+
+    Note over SlowPipeline: Slow Pipeline Details
+    SlowPipeline->>MapReduceDB: MapReduce Databases
+
+    Note over KappaArchitecture: Kappa Architecture Overview
+    KappaArchitecture->>Kafka: Uses Kafka
+    KappaArchitecture->>StreamProcessing: Stream Processing
+    KappaArchitecture->>Database: Storage

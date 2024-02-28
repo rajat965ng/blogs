@@ -1,0 +1,25 @@
+graph TD;
+
+    start[Start] --> cacheInvalidation[Cache Invalidation];
+    cacheInvalidation --> cacheReplacement[Cache Replacement];
+    cacheReplacement --> browserCacheInvalidation[Browser Cache Invalidation];
+    browserCacheInvalidation --> setMaxAge[Set max-age for files];
+    setMaxAge --> fingerprinting[Fingerprinting];
+    fingerprinting --> immutableCacheControl[Use immutable cache-control];
+    immutableCacheControl --> dependentFiles[Dependent Files];
+    dependentFiles --> dependentGETRequests[Dependent GET Requests];
+    dependentGETRequests --> avoidCachingHTML[Avoid caching HTML];
+    avoidCachingHTML --> difficultToFind[Difficult to find during testing];
+    difficultToFind --> fingerprinting[Use Fingerprinting];
+    fingerprinting --> setMaxAge[Set max-age for files];
+    dependentFiles --> avoidCachingHTML;
+    dependentGETRequests --> avoidCachingHTML;
+
+    cacheInvalidation --> cachingService[Cache Invalidation in Caching Services];
+    cachingService --> techniques[Invalidation Techniques];
+    techniques --> maxAgeOrFingerprinting[Max-age or Fingerprinting];
+    maxAgeOrFingerprinting --> createReplaceRemove[Create, Replace, or Remove];
+    createReplaceRemove --> randomReplacement[Random Replacement];
+    createReplaceRemove --> LRU[Least Recently Used LRU];
+    createReplaceRemove --> FIFO[First In, First Out FIFO];
+    createReplaceRemove --> LIFO[Last In, First Out LIFO];

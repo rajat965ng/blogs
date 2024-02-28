@@ -1,0 +1,22 @@
+graph TD;
+
+    start[Start] --> cacheWarming[Cache Warming];
+    cacheWarming --> services[Services like CDNs, frontend, or backend];
+    services --> notBrowser[Not applicable to browser cache];
+
+    subgraph Advantages
+        cacheWarming --> sameLowLatency[First request has low latency];
+    end
+
+    subgraph Disadvantages
+        cacheWarming --> complexityCost[Additional complexity and cost];
+        complexityCost --> reduceCost[Reduce cost by partially filling cache];
+        complexityCost --> additionalTraffic[Additional traffic from querying services];
+        complexityCost --> slowExperience[Only first user receives slow experience];
+        complexityCost --> cacheExpiryTime[Cache expiry time limitation];
+    end
+
+    subgraph Alternatives
+        start --> alternatives[Alternatives to cache warming];
+        alternatives --> reasonableP99[Ensure reasonable P99 for uncached requests];
+    end

@@ -1,0 +1,25 @@
+graph LR
+    ETL[ETL] --> Batch
+    ETL --> Streaming
+    Batch -->|Periodic| BatchJob
+    Streaming -->|Real-time| StreamingJob
+    BatchJob --> MonthlyBills
+    StreamingJob --> KappaArchitecture
+    KappaArchitecture --> MonthlyFiles
+    KappaArchitecture --> SpreadOutCosts
+    KappaArchitecture --> EasierDebugging
+    BatchJob --> Airflow
+    BatchJob --> Luigi
+    StreamingJob --> Kafka
+    StreamingJob --> Flink
+    StreamingJob --> Flume&Scribe
+    ETL --> ETLConcepts
+    ETLConcepts --> DAG[DAG]
+    DAG --> Task1
+    DAG --> Task2
+    Task1 --> Task3
+    Task2 --> Task3
+    DAG --> Task4
+    Task3 --> Task5
+    Task4 --> Task5
+    Job[Job]

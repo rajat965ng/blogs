@@ -1,0 +1,36 @@
+flowchart LR
+
+    subgraph "Messaging System"
+        messaging_system["Messaging System"]
+    end
+
+    subgraph "Message Queue"
+        message_queue["Message Queue"]
+    end
+
+    subgraph "Producer/Consumer"
+        producer_consumer["Producer/Consumer"]
+    end
+
+    subgraph "Message Broker"
+        message_broker["Message Broker"]
+    end
+
+    subgraph "Event Streaming"
+        event_streaming["Event Streaming"]
+    end
+
+    subgraph "Pull vs. Push"
+        pull_vs_push["Pull vs. Push"]
+    end
+
+    messaging_system --> message_queue
+    messaging_system --> producer_consumer
+    messaging_system --> message_broker
+    messaging_system --> event_streaming
+    producer_consumer --> message_queue
+    producer_consumer -->|Asynchronous messaging system| message_broker
+    message_broker --> event_streaming
+    pull_vs_push -->|Pull better than push| producer_consumer
+    pull_vs_push -->|Situation for push| producer_consumer
+    pull_vs_push -->|Exceptions for push| producer_consumer

@@ -1,0 +1,21 @@
+sequenceDiagram
+    participant App as Application
+    participant DB as Database
+    participant Cache
+
+    App->>DB: Write data
+    Note over App,DB: Write-around: Application only writes to database
+
+    Note right of App: Usually combined with
+    Note right of App: cache-aside or read-through
+
+    App->>Cache: Read data
+    Cache-->>App: Data found in cache
+    Note over Cache: Cache hit
+
+    App->>Cache: Read data
+    Cache->>DB: Data not found in cache
+    DB-->>Cache: Retrieve data
+    Cache-->>App: Data retrieved from DB
+    Note over Cache: Cache miss, update cache
+

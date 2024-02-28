@@ -1,0 +1,20 @@
+graph TD;
+
+    subgraph "Exam Process"
+        A[Start] --> B[Cache]
+        B --> C[Database]
+    end
+
+    subgraph "Advantages"
+        C --> D[Consistent]
+    end
+
+    subgraph "Disadvantages"
+        C --> E[Slower writes]
+        C --> F[Cold start problem]
+        C --> G[Unnecessary cost]
+        C --> H[Cache eviction policy]
+    end
+
+    F["Cold start problem"] --> F1["Use cache-aside to resolve"]
+    G["Unnecessary cost"] --> G1["Configure TTL (time-to-live)"]

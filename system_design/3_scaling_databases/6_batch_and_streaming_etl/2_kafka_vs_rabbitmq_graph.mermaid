@@ -1,0 +1,33 @@
+flowchart LR
+
+    subgraph "Kafka"
+        kafka["Kafka"]
+        scalability["Scalability, Reliability, Availability"]
+        zookeeper["Requires ZooKeeper"]
+        replication["Durable with Replication"]
+        retention["Retention Period"]
+        list["Conceptually a List"]
+        priority["No Priority Concept"]
+    end
+
+    subgraph "RabbitMQ"
+        rabbitmq["RabbitMQ"]
+        setup["Simple Setup"]
+        lazy_queue["Lazy Queue for Durability"]
+        dequeuing["Messages Removed on Dequeuing"]
+        multiple_queues["Multiple Queues per Consumer"]
+        priority_queue["Priority Queue Concept"]
+    end
+
+    kafka --> scalability
+    kafka --> zookeeper
+    kafka --> replication
+    kafka --> retention
+    kafka --> list
+    kafka --> priority
+
+    rabbitmq --> setup
+    rabbitmq --> lazy_queue
+    rabbitmq --> dequeuing
+    rabbitmq --> multiple_queues
+    rabbitmq --> priority_queue

@@ -1,0 +1,22 @@
+sequenceDiagram
+    participant Client
+    participant Cache
+    participant Database
+
+    Client->>Cache: Write data
+    Cache->>Database: Write data
+    Database-->>Cache: Confirm write
+    Cache-->>Client: Confirm write
+
+    Note over Cache, Database: Advantages
+    Database-->>Client: Consistent data
+
+    Note over Cache, Database: Disadvantages
+    Database->>Cache: Slower writes
+    Cache->>Client: Slower writes
+    Database->>Cache: Cold start problem
+    Cache->>Client: Cold start problem
+    Database->>Cache: Unnecessary cost
+    Cache->>Client: Unnecessary cost
+    Database->>Cache: Cache eviction policy
+    Cache->>Client: Cache eviction policy

@@ -1,0 +1,32 @@
+sequenceDiagram
+    participant Kafka
+    participant RabbitMQ
+    participant ZooKeeper
+    participant LoadBalancer
+    participant Disk
+
+    Note over Kafka, RabbitMQ: Technical Differences
+
+    Kafka->>ZooKeeper: Requires ZooKeeper
+    Kafka->>ZooKeeper: Configuring IP addresses
+    Kafka->>ZooKeeper: Adjust replication factor
+
+    Kafka->>Disk: Events not removed after consumption
+    Kafka->>Disk: Configurable retention period
+    Kafka->>Disk: No concept of priority
+
+    RabbitMQ->>LoadBalancer: Implement scalability
+    RabbitMQ->>Disk: Lazy queue feature
+    RabbitMQ->>Disk: Messages removed on dequeuing
+    RabbitMQ->>Disk: Multiple queues per message
+    RabbitMQ->>Disk: AMQP standard priority
+
+    Note over Kafka: Designed for scalability, reliability, and availability
+    Note over Kafka: Durable message broker with replication
+    Note over Kafka: Conceptually a list, not a traditional queue
+    Note over Kafka: Configurable retention period, no priority concept
+
+    Note over RabbitMQ: Simple setup, but not scalable by default
+    Note over RabbitMQ: Not scalable or durable by default
+    Note over RabbitMQ: Messages removed on dequeuing, supports multiple queues per message
+    Note over RabbitMQ: AMQP standard priority, no concept of fairness or starvation

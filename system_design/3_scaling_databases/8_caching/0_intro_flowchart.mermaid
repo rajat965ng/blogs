@@ -1,0 +1,25 @@
+flowchart LR
+
+    subgraph "Caching Strategies"
+        performance["Performance"]
+        availability["Availability"]
+        scalability["Scalability"]
+    end
+
+    subgraph "Benefits of Caching"
+        performance --> performance_details["Faster than disk"]
+        availability --> availability_details["Service still available"]
+        scalability --> scalability_details["Serve much of the load"]
+    end
+
+    subgraph "Trade-offs"
+        availability_details["Trade-off with high performance"]
+        scalability_details["Inadvisable for optimizing latency"]
+        rate_limiting["Rate Limiting"]
+    end
+
+    performance_details -->|Intended benefit| availability_details
+    availability_details -->|Subset of data| availability_details
+    availability_details -->|Trade-off| availability_details
+    scalability_details -->|Slow cross-data center requests| availability_details
+    scalability_details --> rate_limiting

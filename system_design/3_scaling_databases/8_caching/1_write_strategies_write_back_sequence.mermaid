@@ -1,0 +1,24 @@
+sequenceDiagram
+    participant App as Application
+    participant Cache
+    participant DB as Database
+
+    App->>Cache: Write data
+    Cache->>Cache: Store data
+    Cache-->>DB: Periodic flush
+
+    Note right of Cache: Periodically flushes updated data to DB
+
+    DB-->>Cache: Acknowledge flush
+    Cache-->>App: Acknowledge write
+
+    Note left of App: Advantages:
+    Note left of App: - Faster writes on average
+    Note left of App: - Non-blocking to DB
+
+    Note right of Cache: Disadvantages:
+    Note right of Cache: - Slower writes
+    Note right of Cache: - Complexity due to high availability requirement
+
+    Note right of Cache: - More complex design
+

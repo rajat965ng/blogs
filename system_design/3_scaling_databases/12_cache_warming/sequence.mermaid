@@ -1,0 +1,22 @@
+sequenceDiagram
+    participant Cache as "Cache"
+    participant Service as "Service"
+    participant Frontend as "Frontend"
+    participant Backend as "Backend"
+    participant Database as "Database"
+    participant User as "User"
+
+    User->>Cache: Cache warming
+    Cache->>Service: Fill cache with entries
+    Service->>Frontend: Cache warm-up
+    Service->>Backend: Cache warm-up
+    Service->>Database: Cache warm-up
+    Note over Cache: Cache warming applies to services like CDNs, frontend, or backend services.
+    Note over Cache: Not applicable to browser cache.
+    Note over Cache: Advantage: First request for precached data will have same low latency as subsequent requests.
+    Note over Cache: Disadvantages:
+    Note over Cache: 1. Additional complexity and cost of implementation.
+    Note over Cache: 2. Additional traffic querying services to fill cache.
+    Note over Cache: 3. Only the first user may experience slow request.
+    Note over Cache: 4. Cache expiry time limitations.
+    Note over Cache: P99 for uncached requests should be reasonable.

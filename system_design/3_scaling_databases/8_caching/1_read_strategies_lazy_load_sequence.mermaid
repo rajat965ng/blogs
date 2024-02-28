@@ -1,0 +1,28 @@
+sequenceDiagram
+    participant App as Application
+    participant Cache as Cache
+    participant DB as Database
+
+    App ->> Cache: Read Request
+    alt Cache Hit
+        Cache -->> App: Return Data
+    else Cache Miss
+        Cache ->> DB: Read Request
+        DB -->> Cache: Data
+        Cache ->> App: Data
+        App ->> Cache: Write Data
+    end
+
+    note over Cache: Lazy Load\nData is loaded\nonly when\nfirst read
+
+    note right of Cache: Cache-aside\nis best for\nread-heavy loads
+
+    note left of Cache: Advantages of\nCache-aside:\n- Minimize\nread requests\n- Easily\nmanage cache\nsize\n- Simple\nimplementation
+
+    note left of DB: Disadvantages of\nCache-aside:\n- Stale/Inconsistent\ndata\n- Slower request\non cache miss
+
+    note over DB: If cache\ncluster goes\ndown, all\nrequests go\nto the database
+
+    App ->> DB: Read Request
+    DB -->> App: Data
+    App ->> Cache: Write Data

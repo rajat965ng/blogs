@@ -1,0 +1,34 @@
+graph TD;
+
+    start[Start] --> separateService[Why is caching a separate service?];
+    separateService --> statelessDesign[Services are stateless];
+    statelessDesign --> randomAssignment[Requests randomly assigned];
+    randomAssignment --> lessLikely[Less likely to have cached data];
+    lessLikely --> databaseComparison[Unlike databases, which are stateful];
+    databaseComparison --> partitioned[Each database node likely serves same data];
+
+    subgraph Further Points
+        partitioned --> usefulUneven[Useful for uneven request patterns];
+        usefulUneven --> uselessUnique[Caching is useless for unique requests];
+    end
+
+    separateService --> cacheWipeout[Caching on hosts leads to cache wipeout];
+    cacheWipeout --> multipleDeployments[Multiple deployments daily];
+
+    subgraph Scaling Cache
+        separateService --> scaleIndependently[Scale cache independently];
+        scaleIndependently --> optimization[Use specific hardware or VMs];
+        optimization --> differentRequirements[Different requirements from services];
+    end
+
+    subgraph Request Deduplication
+        separateService --> deduplicateRequests[Deduplicate requests];
+        deduplicateRequests --> reduceTraffic[Reduce traffic on service];
+        reduceTraffic --> requestCoalescing[Request coalescing];
+    end
+
+    subgraph Caching Considerations
+        separateService --> cacheOnClients[Cache on clients];
+        cacheOnClients --> avoidOverhead[Avoid network request overhead];
+        avoidOverhead --> considerCDN[Consider using CDN];
+    end

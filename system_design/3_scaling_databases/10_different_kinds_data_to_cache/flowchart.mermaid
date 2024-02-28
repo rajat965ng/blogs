@@ -1,0 +1,48 @@
+graph TD;
+
+    start[Start] --> cacheHTTPDatabase[Cache HTTP responses or database queries];
+
+    cacheHTTPDatabase --> cacheBodyHTTP[Cache body of HTTP response];
+    cacheBodyHTTP --> retrieveUsingCacheKey[Retrieve using cache key];
+
+    cacheHTTPDatabase --> cacheRelationalQueries[Use cache-aside pattern to cache relational database queries];
+
+    subgraph Types of Caches
+        cacheHTTPDatabase --> privatePublicCache[Private or public/shared cache];
+        privatePublicCache --> privateCache[Private cache: on client];
+        privatePublicCache --> publicCache[Public cache: CDN or services];
+    end
+
+    subgraph Information not to Cache
+        start --> doNotCache[Information that should not be cached];
+        doNotCache --> privateInfo[Private information];
+        doNotCache --> realtimePublicInfo[Realtime public information];
+        doNotCache --> paidCopyrightedContent[Paid or copyrighted content];
+        doNotCache --> publicInfoChange[Public information that may change];
+    end
+
+    subgraph Caching Strategies
+        start --> cachingStrategies[Caching strategies];
+        cachingStrategies --> revalidation[Revalidation against origin server];
+        revalidation --> maxAgeValue[Set max-age value];
+        maxAgeValue --> logicImplementation[Implement logic for quick validation];
+        logicImplementation --> mustRevalidate[Return must-revalidate];
+        mustRevalidate --> cacheLongExpiry[Cache with long expiry time];
+        cacheLongExpiry --> saveHardwareCosts[Save hardware costs];
+    end
+
+    subgraph Browser Caching
+        start --> browserCaching[Browser caching];
+        browserCaching --> lowerLatencyCost[Lower latency and cost];
+        browserCaching --> improvePerformance[Improve browser app performance];
+        improvePerformance --> usageAnalytics[Complicates usage analytics];
+        usageAnalytics --> loggingUsageCounts[Log usage counts];
+        loggingUsageCounts --> sendLogs[Send logs to backend];
+    end
+
+    subgraph Cache Usage
+        start --> cacheInEveryLayer[Cache in every layer];
+        cacheInEveryLayer --> passThroughFewServices[Pass through few services];
+        passThroughFewServices --> lowerLatency[Lower latency];
+        passThroughFewServices --> lowerCost[Lower cost];
+    end

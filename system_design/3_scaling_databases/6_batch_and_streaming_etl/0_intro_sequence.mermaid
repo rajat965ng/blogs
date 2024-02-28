@@ -1,0 +1,28 @@
+sequenceDiagram
+    participant Source1
+    participant Source2
+    participant Destination
+    participant BatchJob
+    participant StreamingJob
+    participant MonthlyBills
+    participant Kafka
+    participant Flink
+    participant Flume&Scribe
+    participant Airflow
+    participant Luigi
+
+    Source1->>ETL: Extract
+    Source2->>ETL: Extract
+    ETL->>Destination: Load
+    ETL->>BatchJob: Transform (Batch)
+    ETL->>StreamingJob: Transform (Streaming)
+    StreamingJob->>Kafka: Real-time processing
+    StreamingJob->>Flink: Real-time processing
+    StreamingJob->>Flume&Scribe: Real-time processing
+    BatchJob->>MonthlyBills: Periodic processing
+    MonthlyBills-->>Destination: Load
+    ETL-->Airflow: Batch tool
+    ETL-->Luigi: Batch tool
+    ETL-->Kafka: Streaming tool
+    ETL-->Flink: Streaming tool
+    ETL-->Flume&Scribe: Streaming tool

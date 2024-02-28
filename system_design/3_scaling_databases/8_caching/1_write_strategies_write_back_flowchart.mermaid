@@ -1,0 +1,20 @@
+graph TD;
+
+    start[Start] --> writeDataToCache;
+    writeDataToCache[Write data to cache] --> checkFlush;
+    checkFlush{Check if flush needed} -- Yes --> flushToDatabase;
+    checkFlush -- No --> finish[Finish];
+
+    flushToDatabase[Flush data to database] --> finish;
+
+    subgraph Advantages
+        start --> fasterWrites[Faster writes on average];
+        fasterWrites --> nonBlockingWrites[Writes to database are not blocking];
+    end
+
+    subgraph Disadvantages
+        start --> slowerWrites[Slower writes than write-through];
+        slowerWrites --> sameDisadvantages[Same disadvantages as write-through];
+        sameDisadvantages --> complexity[Complexity because of high availability];
+        complexity --> moreComplexDesign[More complex design with high availability and performance];
+    end

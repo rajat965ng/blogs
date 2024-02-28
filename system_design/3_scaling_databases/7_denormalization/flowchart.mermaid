@@ -1,0 +1,38 @@
+flowchart LR
+
+    subgraph "Benefits of Normalization"
+        consistent["Consistent Data"]
+        faster_inserts["Faster Inserts and Updates"]
+        smaller_size["Smaller Database Size"]
+        fewer_columns["Fewer Columns and Indexes"]
+        fewer_joins["Selective JOIN Operations"]
+    end
+
+    subgraph "Disadvantages of Normalization"
+        slower_join_queries["Slower JOIN Queries"]
+        verbose_queries["Verbose Queries"]
+    end
+
+    subgraph "Approach to Faster Read Operations"
+        denormalization["Denormalization"]
+        tradeoff["Tradeoff Storage for Speed"]
+    end
+
+    consistent --> faster_inserts
+    faster_inserts --> smaller_size
+    smaller_size --> fewer_columns
+    fewer_columns --> fewer_joins
+
+    slower_join_queries --> verbose_queries
+
+    denormalization --> tradeoff
+
+    consistent["Consistent Data"]
+    faster_inserts["Faster Inserts and Updates"]
+    smaller_size["Smaller Database Size"]
+    fewer_columns["Fewer Columns and Indexes"]
+    fewer_joins["Selective JOIN Operations"]
+    slower_join_queries["Slower JOIN Queries"]
+    verbose_queries["Verbose Queries"]
+    denormalization["Denormalization"]
+    tradeoff["Tradeoff Storage for Speed"]

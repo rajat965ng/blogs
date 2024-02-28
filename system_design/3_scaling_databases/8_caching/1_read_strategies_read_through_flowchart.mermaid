@@ -1,0 +1,11 @@
+graph TD;
+    A[Application] --> B[Cache]
+    B --> C[Database]
+    B --> D{Cache Hit?}
+    D -->|Yes| E[Return Data]
+    D -->|No| F{Cache Miss?}
+    F -->|Yes| G[Request Data from Database]
+    G --> H[Store Data in Cache]
+    H --> I[Return Data to Application]
+    F -->|No| I
+    A --> I

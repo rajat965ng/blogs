@@ -1,0 +1,31 @@
+sequenceDiagram
+    participant Database
+    participant Cache
+    participant Service
+    participant Applications
+
+    Note over Database, Cache: Technical Details
+
+    Service->>Database: Execute Queries
+    Service->>Cache: Check Cache
+    alt Cache Hit
+        Cache-->>Service: Return Cached Data
+    else Cache Miss
+        Database-->>Service: Retrieve Data
+        Service->>Cache: Store Data in Cache
+    end
+
+    Note over Cache: Benefits of Caching
+
+    Note over Cache: Performance: Faster and more expensive memory compared to disk-based database
+
+    Note over Cache: Availability: Service remains available even if database is unavailable, but only for cached data
+
+    Note over Cache: Scalability: Cache serves frequently requested data, reducing load on backend
+
+    Note over Cache: Trade-offs:
+    Note over Cache: - Designed for high performance and low latency, not high availability
+    Note over Cache: - May make trade-offs against availability for performance
+    Note over Cache: - Inadvisable to replicate cache across data centers due to latency concerns
+
+    Service->>Applications: Return Data

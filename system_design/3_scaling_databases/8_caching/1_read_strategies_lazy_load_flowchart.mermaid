@@ -1,0 +1,34 @@
+flowchart LR
+
+    subgraph "Cache-Aside"
+        read_request["Read Request"]
+        cache_hit["Cache Hit"]
+        cache_miss["Cache Miss"]
+        database_read["Database Read"]
+        write_to_cache["Write to Cache"]
+    end
+
+    subgraph "Advantages"
+        minimize_requests["Minimize Read Requests"]
+        determine_capacity["Determine Cache Capacity"]
+        simplicity["Simplicity of Implementation"]
+    end
+
+    subgraph "Disadvantages"
+        stale_data["Stale/Inconsistent Data"]
+        slower_request["Slower Request on Cache Miss"]
+    end
+
+    read_request -->|Cache Hit| cache_hit
+    read_request -->|Cache Miss| cache_miss
+    cache_miss --> database_read
+    database_read --> write_to_cache
+
+    minimize_requests -->|Resource Consumption| minimize_requests
+    determine_capacity -->|Cost Optimization| determine_capacity
+
+    stale_data -->|TTL| stale_data
+    stale_data -->|Write-Through| stale_data
+
+    slower_request -->|Additional Read Request| slower_request
+    slower_request -->|Additional Write Request| slower_request

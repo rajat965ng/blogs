@@ -1,0 +1,25 @@
+sequenceDiagram
+    participant App as "Application"
+    participant Cache as "Cache Service"
+    participant Client as "Client"
+    participant CDN as "Content Delivery Network"
+    participant Backend as "Backend Service"
+    participant OriginServer as "Origin Server"
+    participant Proxy as "Proxy Server"
+    participant Browser as "Browser"
+
+    App->>Cache: Cache HTTP responses or database queries
+    App->>Cache: Use cache-aside pattern for relational DB queries
+    Cache->>Client: Use private cache for personalized content
+    Cache->>CDN: Use public cache for shared content
+    Cache->>Proxy: Use public cache for shared content
+    Cache->>Backend: Cache public information with revalidation
+    Backend->>OriginServer: Revalidate public information
+    Backend->>Client: Return must-revalidate header
+    Cache->>Client: Cache long-lived public information
+    App->>Client: Cache in every layer for lower latency and cost
+    Client->>Backend: Expect cache misses
+    Backend->>Client: Receive cache miss requests
+    Browser->>Client: Cache CSS for improved performance
+    Browser->>Backend: Complicate usage analytics with client caching
+    Client->>Backend: Log usage counts and send logs

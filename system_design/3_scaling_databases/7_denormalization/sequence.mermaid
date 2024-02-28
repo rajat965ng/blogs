@@ -1,0 +1,23 @@
+sequenceDiagram
+    participant Service
+    participant Host
+    participant SQL
+
+    Note over Service, Host: Technical Details
+
+    Service->>Host: Choose SQL
+    Host->>SQL: Normalize Schema
+
+    Note over Host: Benefits of Normalization
+    SQL->>SQL: Consistent Data
+    SQL->>SQL: Faster Inserts/Updates
+    SQL->>SQL: Smaller Database Size
+    SQL->>SQL: Fewer Indexes
+    SQL->>SQL: Queries Can JOIN Only Needed Tables
+
+    Note over Host: Disadvantages of Normalization
+    SQL->>SQL: Slower JOIN Queries
+    SQL->>SQL: Verbose Queries
+
+    Note over Host: Trade-off Approach
+    SQL->>SQL: Denormalize Schema

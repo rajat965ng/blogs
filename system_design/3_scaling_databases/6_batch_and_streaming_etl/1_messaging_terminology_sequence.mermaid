@@ -1,0 +1,25 @@
+sequenceDiagram
+    participant App as Application
+    participant MS as Messaging System
+    participant MQ as Message Queue
+    participant PC as Producer/Consumer
+    participant MB as Message Broker
+    participant ES as Event Streaming
+
+    Note over App: Application sends data
+    App->>MS: Data transmission request
+    Note over MS: Messaging System handles data transfer
+    MS->>MQ: Send data to queue
+    Note over MQ: Queue holds messages
+    MQ-->>PC: Deliver message
+    Note over PC: Producer/Consumer processes messages
+    PC-->>MB: Send processed data
+    Note over MB: Message Broker translates message
+    MB-->>ES: Send translated message
+    Note over ES: Event Streaming processes events
+
+    Note over MS: Messaging System overview
+    Note over MQ: Message Queue details
+    Note over PC: Producer/Consumer explanation
+    Note over MB: Message Broker description
+    Note over ES: Event Streaming overview

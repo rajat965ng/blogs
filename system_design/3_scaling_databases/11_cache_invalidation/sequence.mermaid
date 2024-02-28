@@ -1,0 +1,27 @@
+sequenceDiagram
+    participant Browser as "Browser Cache"
+    participant CDN as "CDN"
+    participant Backend as "Origin Server"
+    participant App as "Application"
+    participant CacheService as "Caching Service"
+    participant Client as "Client"
+
+    Browser->>Browser: Browser cache invalidation
+    Browser->>CDN: Set max-age for each file
+    CDN->>CDN: Fingerprinting for file versioning
+    CDN->>Browser: Serve files with fingerprinted URLs
+    Browser->>Backend: User reloads page
+    Backend->>Browser: Browser revalidates with origin server
+    Browser->>App: Difficulties in testing
+    App->>App: Fingerprinting ensures correct file versions
+    App->>Browser: Serve new HTML with correct CSS and JS versions
+    Browser->>Client: Serve correct webpage
+    Client->>Backend: Dependent GET requests
+    Backend->>Client: Serve requested details
+    Client->>Browser: Display requested details
+    Browser->>CDN: Request for dependent files
+    CDN->>Browser: Serve dependent files
+    Browser->>App: Handle dependencies
+    App->>CacheService: Cache invalidation in caching services
+    CacheService->>Client: Direct creation, replacement, or removal
+    CacheService->>CacheService: Apply cache replacement policies

@@ -1,0 +1,27 @@
+sequenceDiagram
+    participant Service as Services
+    participant Hosts
+    participant CacheService as "Cache Service"
+    participant DBService as "Database Service"
+    participant Clients
+
+    Service->>Hosts: Stateless design, random assignment
+    Note over Hosts: Each host may cache different data
+
+    Service->>DBService: Stateful, partitioned
+    Note over DBService: Each node serves same data
+
+    Service->>CacheService: Use separate cache service
+    Note over CacheService: Scale independently
+
+    CacheService->>Hosts: Prevent cache wipeout
+    Note over Hosts: Cache wiped out with deployment
+
+    CacheService->>Optimization: Use specific hardware/VMs
+    Note over Optimization: Optimized for caching needs
+
+    Clients->>CacheService: Cache on clients
+    Note over Clients: Reduce network requests
+
+    Clients->>CDN: Consider using CDN
+    Note over CDN: Content delivery network
