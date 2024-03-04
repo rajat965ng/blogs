@@ -13,35 +13,35 @@ sequenceDiagram
     participant BlockStorage
     participant ObjectStorage
 
-    Student->Examiner: Explain storage services
-    Examiner->WebBackend: Request for storage decisions
-    WebBackend->StatefulStorage: Retrieve storage requirements
-    StatefulStorage->StatefulStorage: Choose appropriate mechanisms
+    Student->>Examiner: Explain storage services
+    Examiner->>WebBackend: Request for storage decisions
+    WebBackend->>StatefulStorage: Retrieve storage requirements
+    StatefulStorage->>StatefulStorage: Choose appropriate mechanisms
 
     alt Stateful Service
-        StatefulStorage->StatefulStorage: Ensure consistency\nand redundancy
+        StatefulStorage->>StatefulStorage: Ensure consistency\nand redundancy
     else Stateless Service
-        StatefulStorage->StatefulStorage: Push state to stateful service
+        StatefulStorage->>StatefulStorage: Push state to stateful service
     end
 
-    StatefulStorage->Database: Select database type
-    StatefulStorage->NoSQL: Select NoSQL type
-    StatefulStorage->ColumnOriented: Select Column-Oriented type
-    StatefulStorage->KeyValue: Select Key-Value type
-    StatefulStorage->Document: Select Document type
-    StatefulStorage->Graph: Select Graph type
-    StatefulStorage->FileStorage: Select File Storage type
-    StatefulStorage->BlockStorage: Select Block Storage type
-    StatefulStorage->ObjectStorage: Select Object Storage type
+    StatefulStorage->>Database: Select database type
+    StatefulStorage->>NoSQL: Select NoSQL type
+    StatefulStorage->>ColumnOriented: Select Column-Oriented type
+    StatefulStorage->>KeyValue: Select Key-Value type
+    StatefulStorage->>Document: Select Document type
+    StatefulStorage->>Graph: Select Graph type
+    StatefulStorage->>FileStorage: Select File Storage type
+    StatefulStorage->>BlockStorage: Select Block Storage type
+    StatefulStorage->>ObjectStorage: Select Object Storage type
 
-    Database->Database: Ensure ACID properties
-    NoSQL->NoSQL: Define NoSQL properties
-    ColumnOriented->ColumnOriented: Organize data into columns
-    KeyValue->KeyValue: Store data as key-value pairs
-    Document->Document: Interpret data as documents
-    Graph->Graph: Efficiently store relationships
-    FileStorage->FileStorage: Organize data into files
-    BlockStorage->BlockStorage: Store data in chunks
-    ObjectStorage->ObjectStorage: Store data as objects
+    Database->>Database: Ensure ACID properties
+    NoSQL->>NoSQL: Define NoSQL properties
+    ColumnOriented->>ColumnOriented: Organize data into columns
+    KeyValue->>KeyValue: Store data as key-value pairs
+    Document->>Document: Interpret data as documents
+    Graph->>Graph: Efficiently store relationships
+    FileStorage->>FileStorage: Organize data into files
+    BlockStorage->>BlockStorage: Store data in chunks
+    ObjectStorage->>ObjectStorage: Store data as objects
 
-    StatefulStorage->Examiner: Explain selected storage types
+    StatefulStorage->>Examiner: Explain selected storage types
