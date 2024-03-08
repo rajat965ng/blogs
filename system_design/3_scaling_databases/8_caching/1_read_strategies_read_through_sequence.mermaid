@@ -12,10 +12,10 @@ sequenceDiagram
         Cache ->> App: Data
     end
 
-    note over Cache: Lazy Load\nData is loaded\nonly when\nfirst read
+    note over Cache: Lazy Load: Data is loaded only when first read
 
-    note right of Cache: Read-through\nis best for\nread-heavy loads
+    note right of Cache: Read-through is best for read-heavy loads
 
-    note left of Cache: In read-through,\nthe cache may\ncontact the\ndatabase\nif necessary.
+    note left of Cache: In read-through,the cache may contact the database if necessary.
 
-    note left of Cache: Unlike cache-aside,\nread-through\ncannot group\nmultiple\nrequests\ninto a\nsingle cache\nvalue.
+    note left of Cache: Unlike cache-aside,read-through cannot group multiple requests into a single cache value.
