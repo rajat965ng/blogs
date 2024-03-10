@@ -1,0 +1,44 @@
+graph LR
+    A[Saga] --> B(Sequence of Transactions)
+    B --> C(All transactions must complete successfully)
+    C --> D{Compensating transactions}
+    D -- Yes --> E(Rollback executed transactions)
+    D -- No --> F(Manage failures)
+    A --> G(No state)
+    A --> H(Services communicating via message broker)
+    H --> I[Kafka or RabbitMQ]
+    A --> J(Distributed transaction based on service requirements)
+    J --> K(Booking a tour package)
+    K --> L[Travel service]
+    K --> M[Airline ticket service]
+    K --> N[Hotel room service]
+    M --> O[Write request]
+    N --> P[Write request]
+    L --> Q{Available flights and hotel rooms}
+    Q -- No --> R(Rollback entire saga)
+    Q -- Yes --> S(Write request to payments service)
+    S --> T[Payments service]
+    T --> U[Confirm ticket availability]
+    T --> V[Confirm room availability]
+    U --> W{Confirm availability}
+    V --> W
+    W -- Yes --> X(Make payment)
+    W -- No --> Y(Rollback entire saga)
+    X --> Z{Transaction success}
+    Z -- Yes --> AA(End)
+    Z -- No --> AB(Rollback entire saga)
+    AB --> AC{Compensating transactions}
+    AC -- Yes --> AD(Rollback in reverse order)
+    AC -- No --> AE(End)
+    M --> AF[Write to payments service]
+    N --> AF
+    AF --> AG[Separate payments service]
+    AG --> AH[Payment processing conditions]
+    AG --> AI[User's private payment information]
+    AH --> AJ(Confirm tour package)
+    AI --> AJ
+    AJ --> AK{Transaction to payments service}
+    AK -- Failed --> AL(Rollback entire saga)
+    AL --> AM{Compensating transactions}
+    AM -- Yes --> AN(Rollback in reverse order)
+    AM -- No --> AO(End)

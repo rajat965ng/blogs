@@ -1,0 +1,36 @@
+sequenceDiagram
+    participant A as Saga
+    participant B as Transaction
+    participant C as CompensatingTransaction
+    participant D as MessageBroker
+    participant E as Services
+    participant F as PaymentsService
+    participant G as AirlineTicketService
+    participant H as HotelRoomService
+    participant I as TravelService
+    participant J as User
+
+    A->>+B: Start Saga
+    B-->>-A: Saga Started
+    A->>+E: Check Availability
+    E->>+G: Check Flight Availability
+    G-->>+E: Flight Available
+    E->>+H: Check Room Availability
+    H-->>+E: Room Available
+    E->>+F: Make Payment Request
+    F-->>+E: Payment Successful
+    E-->>-A: Saga Completed
+
+    A->>+F: Check Payment Confirmation
+    F->>+G: Confirm Flight Booking
+    G-->>+F: Flight Confirmed
+    F->>+H: Confirm Room Booking
+    H-->>+F: Room Confirmed
+    F-->>-A: Saga Completed
+
+    A->>+F: Process Payment
+    F-->>-A: Saga Completed
+    A-xF: Saga Rollback
+    F-->>-A: Saga Rolled Back
+    A->>+C: Compensate
+    C-->>-A: Compensation Completed

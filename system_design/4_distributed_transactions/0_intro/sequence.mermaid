@@ -1,0 +1,35 @@
+sequenceDiagram
+    participant Client
+    participant Service1
+    participant Service2
+    participant Kafka
+    participant Service3
+
+    Client->>Service1: Request Transaction
+    Service1->>Service1: Group reads and writes
+    Service1->>Service1: Execute atomically
+    Service1->>Service1: Check ACID properties
+    alt ACID properties differ
+        Service1->>Service1: Implementations differ
+    else ACID properties are understood
+        Service1->>Service1: Implementations are consistent
+    end
+    Service1->>Kafka: Distribute writes via Kafka
+    Service1->>Service2: Introduce distributed transaction
+    Service2->>Service2: Combine write requests
+    Service2->>Service2: Check consensus
+    alt Consensus needed
+        Service2->>Service2: Introduce consensus
+        Service2->>Service2: All services agree on write event
+    else Consensus not needed
+        Service2->>Service2: Proceed without consensus
+    end
+    Service2->>Service3: Execute transaction
+    alt Transaction succeeds
+        Service3->>Service3: Commit transaction
+        Service3->>Client: Transaction Success
+    else Transaction fails
+        Service3->>Service3: Abort transaction
+        Service3->>Service3: Rollback changes
+        Service3->>Client: Transaction Failure
+    end

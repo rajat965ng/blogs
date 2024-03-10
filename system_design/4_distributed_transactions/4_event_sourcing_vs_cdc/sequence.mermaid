@@ -1,0 +1,22 @@
+sequenceDiagram
+    participant EDA
+    participant EventSourcing
+    participant CDC
+    participant Service1
+    participant Service2
+    participant Service3
+
+    EDA->>EventSourcing: Record events as source of truth
+    EventSourcing->>Service1: Publish events to log
+    EventSourcing->>Service1: Record fine-grained events
+
+    EDA->>CDC: Synchronize data changes
+    CDC->>Service1: Propagate events from source service
+    CDC->>Service2: Synchronize data changes
+    CDC->>Service3: Synchronize data changes
+
+    Note over EventSourcing: Log or published events<br/>are source of truth
+    Note over CDC: Database in publisher service<br/>is source of truth
+
+    Note over EventSourcing: Fine-grained events<br/>represent specific actions or state changes
+    Note over CDC: Individual database level changes<br/>such as new, updated, or deleted rows/documents

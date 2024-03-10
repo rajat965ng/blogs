@@ -1,0 +1,33 @@
+sequenceDiagram
+    participant Orchestrator
+    participant TicketService
+    participant HotelService
+    participant PaymentService
+
+    Note over Orchestrator: Orchestration begins
+    Orchestrator->>TicketService: Produce ticket request event to booking topic
+    TicketService->>Orchestrator: Consume ticket request event
+    Note over TicketService: Reserve airline ticket\nwith state "AWAITING_PAYMENT"
+    TicketService->>TicketService: Produce "ticket pending payment" event to response topic
+    Orchestrator->>TicketService: Consume "ticket pending payment" event
+    Orchestrator->>HotelService: Produce hotel reservation request event to hotel topic
+    HotelService->>Orchestrator: Consume hotel reservation request event
+    Note over HotelService: Reserve hotel room\nwith state "AWAITING_PAYMENT"
+    HotelService->>HotelService: Produce "room pending payment" event to response topic
+    Orchestrator->>HotelService: Consume "room pending payment" event
+    Orchestrator->>PaymentService: Produce payment request event to payment topic
+    PaymentService->>Orchestrator: Consume payment request event
+    Note over PaymentService: Process payment
+    PaymentService->>PaymentService: Produce payment confirmation event to response topic
+    Orchestrator->>PaymentService: Consume payment confirmation event
+    Orchestrator->>TicketService: Produce payment confirmation event to booking topic
+    TicketService->>Orchestrator: Consume payment confirmation event
+    Note over TicketService: Change booking state to "CONFIRMED"
+    TicketService->>TicketService: Produce ticket confirmation event to response topic
+    Orchestrator->>TicketService: Consume ticket confirmation event from response topic
+    Orchestrator->>HotelService: Produce payment confirmation event to hotel topic
+    HotelService->>Orchestrator: Consume payment confirmation event
+    Note over HotelService: Change booking state to "CONFIRMED"
+    HotelService->>HotelService: Produce hotel room confirmation event to response topic
+    Orchestrator->>Orchestrator: Consume hotel room confirmation event
+    Note over Orchestrator: Perform next steps,\nsuch as sending success response\nto user or further internal logic

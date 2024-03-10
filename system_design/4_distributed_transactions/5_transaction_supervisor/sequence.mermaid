@@ -1,0 +1,24 @@
+sequenceDiagram
+    participant Supervisor
+    participant Interface
+    participant BatchJob
+    participant ServerlessFunction
+    participant ReviewInterface
+    participant CompensatingTransaction
+    participant Testing
+    participant DistributedTransactions
+    participant Logging
+
+    Supervisor->>Interface: Implement as manual review interface
+    Interface->>ReviewInterface: Review inconsistencies
+    ReviewInterface->>CompensatingTransaction: Execute compensating transactions manually
+    CompensatingTransaction->>Logging: Log compensating transaction
+
+    Supervisor->>BatchJob: Implement as periodic batch job
+    Supervisor->>ServerlessFunction: Implement as serverless function
+
+    BatchJob->>CompensatingTransaction: Automate compensating transactions
+    ServerlessFunction->>CompensatingTransaction: Automate compensating transactions
+    CompensatingTransaction->>Testing: Extensively test automated compensating transactions
+    Testing->>DistributedTransactions: Ensure no interference
+    DistributedTransactions->>Logging: Log compensating transaction

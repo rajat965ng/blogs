@@ -1,0 +1,29 @@
+sequenceDiagram
+    participant CDC
+    participant ChangeLogEventStream
+    participant Consumer
+    participant DownstreamService
+    participant TransactionLogMiner
+    participant MessageBroker
+
+    CDC->>ChangeLogEventStream: Log data change events
+    CDC->>ChangeLogEventStream: Provide event stream through API
+
+    ChangeLogEventStream->>Consumer: Publish single event(s)
+    Consumer->>DownstreamService: Provide event to downstream service
+
+    Consumer->>Consumer: Consume event
+    DownstreamService->>DownstreamService: Process event
+
+    Note right of CDC: Ensures consistency<br/>and lower latency
+    Note right of CDC: Processes requests<br/>in near real time
+
+    Note right of TransactionLogMiner: Tails database's transaction log
+    TransactionLogMiner->>TransactionLogMiner: Produce each update as event
+
+    Note left of CDC: CDC platforms include Debezium<br/>as transaction log miners
+    Note left of TransactionLogMiner: May generate duplicate events
+
+    Note right of TransactionLogMiner: Handle duplicate events:
+    Note right of TransactionLogMiner: - Exactly-once delivery mechanisms<br/>- Idempotent event processing
+    MessageBroker-->>TransactionLogMiner: Exactly-once delivery mechanisms

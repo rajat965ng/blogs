@@ -1,0 +1,38 @@
+graph TD;
+    A[Start] --> B{Event Driven Architecture EDA?}
+    B -->|Yes| C[Announce events instead of requesting work]
+    B -->|No| Z[End]
+    C --> D[Asynchronous and non-blocking]
+    D --> E[Request processing]
+    E -->|Request processed| F[Publish event]
+    F -->|Successful| G[Return successful response]
+    G --> H[Process event]
+    H --> I[Send response]
+    I --> J{EDA promotes?}
+    J -->|Yes| K[Loose coupling, scalability, responsiveness]
+    J -->|No| L[End]
+    K --> M[Alternative to EDA]
+    M --> N[Direct service-to-service request]
+    N --> O[Unavailability or slow performance]
+    O -->|Impact| P[Overall system unavailability]
+    P --> Q[Request consumes thread]
+    Q --> R[Less thread available]
+    R --> S{Request takes long time?}
+    S -->|Yes| T[Traffic spike impact]
+    S -->|No| U[End]
+    T --> V[Service overwhelmed]
+    V --> W[504 timeouts]
+    W --> X[Requestor impact]
+    X --> Y[Device resources reduced]
+    Y --> U
+    U --> Z{Prevent outages?}
+    Z -->|Yes| AA[Complex auto-scaling or large cluster]
+    Z -->|No| AB[End]
+    AA --> AB[More expensive, error-prone]
+    AB --> AC[Strong consistency, low latency]
+    AC --> AD{Needed by users?}
+    AD -->|Yes| AE[End]
+    AD -->|No| AF[Less resource-intensive approach]
+    AF --> AG[Publish event onto event log]
+    AG --> AH[No continuous thread consumption]
+    AH --> AE

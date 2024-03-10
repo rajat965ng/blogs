@@ -1,0 +1,34 @@
+graph TD
+    subgraph Orchestration
+        A[Orchestrator] -->|1. Produce Ticket Request| B
+        B[Ticket Service] -->|2. Consume Ticket Request| C
+        C[Ticket Service] -->|3. Produce 'Ticket Pending Payment'| D
+        D[Orchestrator] -->|4. Consume 'Ticket Pending Payment'| E
+        E[Orchestrator] -->|5. Produce Hotel Reservation Request| F
+        F[Hotel Service] -->|6. Consume Hotel Reservation Request| G
+        G[Hotel Service] -->|7. Produce 'Room Pending Payment'| H
+        H[Orchestrator] -->|8. Consume 'Room Pending Payment'| I
+        I[Orchestrator] -->|9. Produce Payment Request| J
+        J[Payment Service] -->|10. Consume Payment Request| K
+        K[Payment Service] -->|11. Process Payment| L
+        L[Orchestrator] -->|12. Consume Payment Confirmation| M
+        M[Orchestrator] -->|13. Produce Payment Confirmation| N
+        N[Ticket Service] -->|14. Consume Payment Confirmation| O
+        O[Ticket Service] -->|15. Produce Ticket Confirmation| P
+        P[Orchestrator] -->|16. Consume Ticket Confirmation| Q
+        Q[Orchestrator] -->|17. Produce Payment Confirmation| R
+        R[Hotel Service] -->|18. Consume Payment Confirmation| S
+        S[Hotel Service] -->|19. Produce Hotel Room Confirmation| T
+        T[Booking Service Orchestrator] -->|20. Consume Hotel Room Confirmation| U
+    end
+
+    subgraph Compensating Transactions
+        E -->|Compensation| B
+        I -->|Compensation| F
+        M -->|Compensation| J
+    end
+
+    subgraph Retriable Transactions
+        O -->|Retry| P
+        Q -->|Retry| R
+    end

@@ -1,0 +1,14 @@
+graph TD
+    A[Transaction Supervisor] --> B[Ensure transaction completion or compensation]
+    B --> C[Implement as periodic batch job or serverless function]
+    B --> D[Implement as interface for manual review]
+
+    D --> E[Review inconsistencies]
+    D --> F[Execute compensating transactions manually]
+
+    E --> G[Automate compensating transactions]
+    G --> H[Extensively test automated compensating transactions]
+    H --> I[Ensure no interference with other transaction mechanisms]
+
+    I --> J[Log compensating transaction]
+    F --> J

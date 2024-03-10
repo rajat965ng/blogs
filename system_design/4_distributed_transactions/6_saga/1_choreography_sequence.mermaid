@@ -1,0 +1,31 @@
+sequenceDiagram
+    participant User
+    participant BookingService
+    participant TicketService
+    participant HotelService
+    participant PaymentService
+    participant KafkaTopics
+
+    User->>BookingService: Makes booking request
+    BookingService->>KafkaTopics: Produce booking request event
+    TicketService-->>KafkaTopics: Consume booking request event
+    HotelService-->>KafkaTopics: Consume booking request event
+    TicketService->>TicketTopic: Produce payment request event
+    HotelService->>HotelTopic: Produce payment request event
+    PaymentService-->>TicketTopic: Consume payment request event
+    PaymentService-->>HotelTopic: Consume payment request event
+    PaymentService->>Database: Record receipt of payment request events
+    PaymentService->>PaymentTopic: Produce payment success event
+    TicketService-->>PaymentTopic: Consume payment success event
+    HotelService-->>PaymentTopic: Consume payment success event
+    BookingService-->>PaymentTopic: Consume payment success event
+
+    alt Payment Success
+        TicketService->>Database: Confirm booking
+        HotelService->>Database: Confirm booking
+        BookingService->>User: Inform booking confirmation
+    else Payment Failure
+        TicketService->>Database: Cancel booking
+        HotelService->>Database: Cancel booking
+        BookingService->>User: Return error response
+    end

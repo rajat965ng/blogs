@@ -1,0 +1,27 @@
+sequenceDiagram
+    participant Publisher
+    participant EventLog
+    participant Subscriber
+
+    Publisher->>EventLog: Write Event
+    EventLog->>Subscriber: New Event
+
+    Note right of Publisher: Publishes event<br/>to event log
+
+    loop Event Handling
+        Subscriber->>EventLog: Retrieve Event
+        EventLog->>Subscriber: Event Data
+        Subscriber->>Subscriber: Process Event
+    end
+
+    Note right of Subscriber: Processes event from<br/>the event log
+
+    Note right of EventLog: Persists event to log
+
+    Note left of Publisher: Various implementations:<br/>- Kafka Topic<br/>- Relational DB<br/>- Document DB<br/>- In-Memory DB
+
+    Note over EventLog, Subscriber: Provides complete audit trail<br/>and insights into past states
+
+    Note over EventLog, Subscriber: Allows changes to business logic<br/>without affecting existing data
+
+    Note over EventLog, Subscriber: Adds complexity to design<br/>and development<br/>Increases storage requirements<br/>Event replay becomes costly

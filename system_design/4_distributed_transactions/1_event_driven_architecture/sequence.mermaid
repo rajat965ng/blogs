@@ -1,0 +1,29 @@
+sequenceDiagram
+    participant Publisher
+    participant Server
+    participant Subscriber
+    participant Requestor
+
+    Publisher->>Server: Publish Event
+    alt Event successfully published
+        Server->>Server: Process Event
+        Server->>Server: Send successful response
+        alt Response necessary
+            Server->>Requestor: Send Response
+        end
+    else Event failed to publish
+        Server->>Publisher: Event Failure
+    end
+    Server->>Subscriber: Process Event
+
+    alt Service-to-Service Request
+        Requestor->>Server: Make Request
+        Server->>Server: Process Request
+        Server->>Requestor: Send Response
+    end
+
+    alt Traffic Spike
+        Server->>Server: Overwhelmed
+        Server-->>Requestor: 504 Timeout
+        Requestor-->>Subscriber: Thread unavailable
+    end

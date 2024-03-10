@@ -1,0 +1,20 @@
+graph TD
+    A[User] -->|Makes booking request| B(Booking Service)
+    B -->|Produces booking request event| C(Kafka Topic - Booking)
+    C -->|Consumed by| D(Ticket Service)
+    C -->|Consumed by| E(Hotel Service)
+    D -->|Confirms request can be fulfilled| F(Record in database)
+    E -->|Confirms request can be fulfilled| G(Record in database)
+    F -->|Produces payment request event| H(Kafka Topic - Ticket)
+    G -->|Produces payment request event| I(Kafka Topic - Hotel)
+    H -->|Consumed by| J(Payment Service)
+    I -->|Consumed by| J
+    J -->|Records receipt in database| K(Database)
+    J -->|Processes payment| L
+    L -->|Produces payment success event| M(Kafka Topic - Payment)
+    M -->|Consumed by| D
+    M -->|Consumed by| E
+    M -->|Consumed by| B
+    M -->|Consumed by| N(Business Logic)
+    N -->|Confirms booking| O(Record in database)
+    O -->|Inform booking confirmation| A

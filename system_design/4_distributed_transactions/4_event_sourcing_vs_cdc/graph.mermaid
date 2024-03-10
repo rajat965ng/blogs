@@ -1,0 +1,33 @@
+graph TD
+    subgraph Event-driven architecture
+        A[Decouple services] --> B[Asynchronous communication]
+        B --> C[Propagate data changes]
+    end
+
+    subgraph Event Sourcing
+        D[Record events as source of truth] --> E[Log or published events]
+        F[Fine-grained events] --> G[Specific actions or state changes]
+    end
+
+    subgraph CDC
+        H[Synchronize data changes] --> I[Propagate events from source to downstream services]
+        I --> J[Database in publisher service]
+        K[Individual database level changes] --> L[New, updated, or deleted rows/documents]
+    end
+
+    A --> H
+    B --> H
+    H --> D
+    H --> K
+    I --> E
+    J --> M[Published events]
+    K --> L
+
+    classDef edaClass fill:#ffcccc,stroke:#333,stroke-width:2px;
+    classDef esClass fill:#ccffcc,stroke:#333,stroke-width:2px;
+    classDef cdcClass fill:#ccccff,stroke:#333,stroke-width:2px;
+
+    class A,B,C edaClass;
+    class D,E,F,G esClass;
+    class H,I,J,K,L cdcClass;
+    class M edaClass;

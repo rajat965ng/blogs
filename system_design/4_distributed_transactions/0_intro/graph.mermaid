@@ -1,0 +1,24 @@
+graph TD;
+    A[Start] --> B{Is a transaction necessary?}
+    B -->|Yes| C[Group reads and writes]
+    B -->|No| Z[End]
+    C --> D[Execute atomically]
+    D --> E{Transaction result}
+    E -->|Success| F[Commit transaction]
+    E -->|Failure| G[Abort transaction]
+    G --> H[Rollback changes]
+    F --> I{ACID properties}
+    I -->|Yes| J[Implementation differs]
+    I -->|No| K[End]
+    J --> L[Understanding of ACID concepts differs]
+    L --> M[Implementations differ]
+    K --> N{Use event-streaming platform like Kafka?}
+    N -->|Yes| O[Distribute writes via Kafka]
+    N -->|No| P[Introduce distributed transaction]
+    P --> Q[Combine write requests]
+    Q --> R{Consensus needed?}
+    R -->|Yes| S[Introduce consensus]
+    R -->|No| T[End]
+    S --> U[All services agree on write event]
+    U --> V[Consistency despite faults]
+    V --> T

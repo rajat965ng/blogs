@@ -1,0 +1,47 @@
+graph TD
+    A[Change Data Capture CDC] -- Logs data change events --> B[Change Log Event Stream]
+    B -- Provides event stream through API --> C[Multiple Consumers]
+    C -- Consumes event --> D[Downstream Service]
+    D --> E[Process Event]
+    B -- Ensures consistency and lower latency --> F[Multiple Consumers]
+    F --> G[Downstream Service]
+    G --> H[Process Event]
+    B -- Publishes single event's' --> I[Single Event]
+I -- Consumed by downstream service --> J[Downstream Service]
+J --> K[Process Event]
+A -- Ensures consistency and lower latency --> L[Transaction Log Tailing Pattern]
+L -- Prevents inconsistency --> M[Write to Database]
+M --> N[Produce to Kafka]
+L -- Utilizes transaction log miner --> O[Transaction Log Miner]
+O -- Tails database's transaction log --> P[Produce each update as event]
+O --> Q[Debezium]
+Q -- Used as transaction log miner --> R[Transaction Log Miner]
+R --> S[Produce each update as event]
+R -- May generate duplicate events --> T[Handle Duplicate Events]
+T -- Exactly-once delivery mechanisms --> U[Message Broker]
+T -- Defined and processed idempotently --> V[Events]
+V --> W[Process Event]
+
+style A fill:#f9f,stroke:#333,stroke-width:4px
+style B fill:#f9f,stroke:#333,stroke-width:4px
+style C fill:#f9f,stroke:#333,stroke-width:4px
+style D fill:#f9f,stroke:#333,stroke-width:4px
+style E fill:#f9f,stroke:#333,stroke-width:4px
+style F fill:#f9f,stroke:#333,stroke-width:4px
+style G fill:#f9f,stroke:#333,stroke-width:4px
+style H fill:#f9f,stroke:#333,stroke-width:4px
+style I fill:#f9f,stroke:#333,stroke-width:4px
+style J fill:#f9f,stroke:#333,stroke-width:4px
+style K fill:#f9f,stroke:#333,stroke-width:4px
+style L fill:#f9f,stroke:#333,stroke-width:4px
+style M fill:#f9f,stroke:#333,stroke-width:4px
+style N fill:#f9f,stroke:#333,stroke-width:4px
+style O fill:#f9f,stroke:#333,stroke-width:4px
+style P fill:#f9f,stroke:#333,stroke-width:4px
+style Q fill:#f9f,stroke:#333,stroke-width:4px
+style R fill:#f9f,stroke:#333,stroke-width:4px
+style S fill:#f9f,stroke:#333,stroke-width:4px
+style T fill:#f9f,stroke:#333,stroke-width:4px
+style U fill:#f9f,stroke:#333,stroke-width:4px
+style V fill:#f9f,stroke:#333,stroke-width:4px
+style W fill:#f9f,stroke:#333,stroke-width:4px
