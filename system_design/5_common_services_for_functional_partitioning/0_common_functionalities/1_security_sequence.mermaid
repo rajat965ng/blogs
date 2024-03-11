@@ -1,0 +1,20 @@
+sequenceDiagram
+    participant Client
+    participant Service
+    participant APIGateway
+    participant HTTPProxy
+    participant BackendHosts
+    participant Database
+
+    Client->>+APIGateway: Request
+    APIGateway->>+APIGateway: Authentication
+    APIGateway->>+APIGateway: Authorization
+    APIGateway->>HTTPProxy: SSL/TLS Termination
+    HTTPProxy->>+BackendHosts: Forward request
+    BackendHosts->>Database: Access data
+    BackendHosts->>+APIGateway: Encrypt data
+    APIGateway->>+Client: Response with encrypted data
+    Client->>+APIGateway: Request for data
+    APIGateway->>BackendHosts: Decrypt data
+    BackendHosts->>APIGateway: Retrieve decrypted data
+    APIGateway->>Client: Response with decrypted data

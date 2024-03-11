@@ -1,0 +1,18 @@
+sequenceDiagram
+    participant Service
+    participant Sidecar
+    participant ControlPlane
+    participant DataPlane
+    participant ProxyHosts
+    participant ExternalServices
+    participant ObservabilityPlane
+
+    Service->>+Sidecar: Request
+    Sidecar->>+ProxyHosts: Forward Request
+    ProxyHosts->>+ExternalServices: Handle Request
+    ControlPlane->>ControlPlane: Manage Proxies and Services
+    ControlPlane->>+ExternalServices: Interface with External Services
+    ControlPlane->>+ProxyHosts: Push Configurations
+    ProxyHosts->>+ProxyHosts: Mesh Traffic (Interservice and Intraservice Requests)
+    Sidecar->>+Sidecar: Use Various Protocols (HTTP, gRPC)
+    ObservabilityPlane->>+ObservabilityPlane: Logging, Monitoring, Alerting, Auditing

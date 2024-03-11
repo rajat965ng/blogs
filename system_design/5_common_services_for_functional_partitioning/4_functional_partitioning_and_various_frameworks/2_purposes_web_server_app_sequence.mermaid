@@ -1,0 +1,13 @@
+sequenceDiagram
+    participant Browser
+    participant NodeJSApp
+    participant Backend
+
+    Browser->>+NodeJSApp: Access URL
+    NodeJSApp->>+Browser: Download Browser App
+    Browser->>+NodeJSApp: Make URL Request
+    NodeJSApp->>+Backend: Route URL and Serve Page
+    Browser->>+NodeJSApp: Perform User Action
+    NodeJSApp->>+Backend: Make Backend Requests
+    Backend->>+NodeJSApp: Return Data
+    NodeJSApp->>+Browser: Return Data to Browser

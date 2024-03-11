@@ -1,0 +1,17 @@
+sequenceDiagram
+    participant Client
+    participant APIGateway
+    participant DatabaseService
+    participant MetadataService
+    participant AuthService
+    participant OtherService
+
+    Client->>+APIGateway: Request
+    APIGateway->>+APIGateway: Caching
+    APIGateway->>+DatabaseService: Cache common requests
+    APIGateway->>+MetadataService: Retrieve metadata
+    APIGateway->>+AuthService: Check identity information
+    APIGateway->>+APIGateway: Rate Limiting
+    APIGateway->>+OtherService: Request dispatching
+    OtherService->>+OtherService: Process request
+    APIGateway->>-Client: Response

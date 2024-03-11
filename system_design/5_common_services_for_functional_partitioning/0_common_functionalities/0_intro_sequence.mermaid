@@ -1,0 +1,19 @@
+sequenceDiagram
+    participant Service
+    participant NonFunctionalRequirements
+    participant FunctionalServices
+    participant Libraries
+    participant Users
+    participant Hosts
+    participant APIGateway
+    participant CloudProviders
+
+    Service->>NonFunctionalRequirements: Has
+    NonFunctionalRequirements->>FunctionalServices: Can share
+    FunctionalServices->>Libraries: Utilize
+    Libraries->>Users: Controlled updates
+    Users-->>Libraries: May continue running old versions
+    Libraries-->>Hosts: Deployed on hosts
+    Hosts-->>FunctionalServices: Run libraries
+    FunctionalServices-->>APIGateway: Centralization request
+    APIGateway-->>CloudProviders: Provides functionalities

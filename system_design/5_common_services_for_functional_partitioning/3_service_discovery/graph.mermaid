@@ -1,0 +1,11 @@
+graph TD;
+    A[Service Discovery] -->|Microservices concept| B[Interview Context];
+    B -->|Managing multiple services| C[Managing Services];
+    C -->|Done under the hood| D[Underlying Process];
+    D -->|Engineers do not need to understand details| E[Details Irrelevant];
+    E -->|Internal API services assigned port numbers| F[Internal API];
+    E -->|External API services and UI services assigned URLs| G[External & UI Services];
+    B -->|Covered in interviews for infrastructure teams| H[Infrastructure Teams];
+    H -->|Service discovery details unlikely for other engineers| I[Details Irrelevant for Other Engineers];
+    I -->|Service discovery identifies available service hosts| J[Client Identification];
+    J -->|Service registry keeps track of available hosts| K[Service Registry];

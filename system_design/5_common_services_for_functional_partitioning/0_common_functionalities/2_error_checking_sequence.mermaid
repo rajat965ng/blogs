@@ -1,0 +1,26 @@
+sequenceDiagram
+    participant Client
+    participant APIGateway
+    participant ServiceHost
+
+    Client->>+APIGateway: Request
+    APIGateway->>+APIGateway: Request Validation
+    alt Valid Request
+        APIGateway->>+ServiceHost: Forward Valid Request
+        ServiceHost->>ServiceHost: Process Valid Request
+        ServiceHost->>APIGateway: Response
+        APIGateway->>Client: Response
+    else Invalid Request
+        APIGateway->>Client: Error Response
+    end
+
+    Client->>+APIGateway: Duplicate Request
+    APIGateway->>+APIGateway: Request Deduplication
+    alt Not a Duplicate
+        APIGateway->>+ServiceHost: Forward Duplicate Request
+        ServiceHost->>ServiceHost: Process Duplicate Request
+        ServiceHost->>APIGateway: Response
+        APIGateway->>Client: Response
+    else Duplicate
+        APIGateway->>Client: Success Response from Cache
+    end

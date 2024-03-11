@@ -1,0 +1,14 @@
+sequenceDiagram
+    participant Client
+    participant APIGateway
+    participant AnalyticsSystem
+    participant AuditingSystem
+    participant BillingSystem
+    participant DebuggingSystem
+
+    Client->>+APIGateway: Request
+    APIGateway->>+APIGateway: Request Logging / Usage Data Collection
+    APIGateway->>+AnalyticsSystem: Gather Real-time Information
+    APIGateway->>+AuditingSystem: Gather Real-time Information
+    APIGateway->>+BillingSystem: Gather Real-time Information
+    APIGateway->>+DebuggingSystem: Gather Real-time Information

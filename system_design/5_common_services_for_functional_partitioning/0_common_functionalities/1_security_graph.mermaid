@@ -1,0 +1,10 @@
+graph TD;
+    A[Service's Data] -->|Prevent unauthorized access| B[Functionalities];
+    B -->|Authentication| C[Verify request is from authorized user];
+    B -->|Authorization| D[Verify user is allowed to make request];
+    B -->|SSL termination| E[Terminate SSL/TLS];
+    E -->|Usually handled by separate HTTP proxy| F[Proxy termination];
+    F -->|Reason: SSL termination on load balancer is expensive| G[Expensive termination];
+    E -->|TLS, the successor to SSL| H[Actual protocol: TLS];
+    B -->|Server-side data encryption| I[Encrypt data before storage];
+    I -->|Decrypt data before sending to requestor| J[Decrypt data];

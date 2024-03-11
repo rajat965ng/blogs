@@ -1,0 +1,11 @@
+sequenceDiagram
+    participant Client
+    participant ServiceDiscovery
+    participant ServiceRegistry
+    participant ServiceHost
+
+    Client->>+ServiceDiscovery: Request Service
+    ServiceDiscovery->>+ServiceRegistry: Request Service Information
+    ServiceRegistry->>+ServiceDiscovery: Provide Service Information
+    ServiceDiscovery->>+ServiceHost: Request Service Access
+    ServiceHost->>+Client: Provide Service Access

@@ -1,0 +1,13 @@
+graph TD;
+    A[Invalid or Duplicate Requests] -->|Prevent from reaching service hosts| B[Error-Checking];
+    B -->|Request Validation| C[Ensure proper formatting];
+    C -->|Example| D[Validate POST request body as JSON];
+    C -->|Ensure presence of required parameters and honor constraints| E[Validate parameters];
+    E -->|Configuration on API gateway| F[Configure requirements];
+    B -->|Request Deduplication| G[Prevent duplication];
+    G -->|Occurs when response with success status fails to reach client| H[Response failure];
+    G -->|Caching| I[Use caching];
+    I -->|Store previously seen request IDs| J[Store request IDs];
+    H -->|Service characteristics| K[Service characteristics check];
+    K -->|Idempotent, Stateless, or “At least once” delivery| L[Handle duplicate requests];
+    K -->|“Exactly once” or “At most once” delivery| M[Error due to duplication];

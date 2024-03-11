@@ -1,0 +1,59 @@
+graph LR;
+    Physical --> DataLink;
+    DataLink --> Network;
+    Network --> Transport;
+    Transport --> Session;
+    Session --> Presentation;
+    Presentation --> Application;
+
+    subgraph Layer_1_Physical
+        Physical
+        Fiber --> Physical
+        coax --> Physical
+        repeater --> Physical
+        modem --> Physical
+        network_adapter --> Physical
+        USB --> Physical
+    end
+
+    subgraph Layer_2_DataLink
+        DataLink
+        Ethernet --> DataLink
+        wifi --> DataLink
+    end
+
+    subgraph Layer_3_Network
+        Network
+        IP --> Network
+        ICMP --> Network
+    end
+
+    subgraph Layer_4_Transport
+        Transport
+        TCP --> Transport
+        UDP --> Transport
+    end
+
+    subgraph Layer_5_Session
+        Session
+        RPC --> Session
+        SQL --> Session
+        NFX --> Session
+        X_Windows --> Session
+    end
+
+    subgraph Layer_6_Presentation
+        Presentation
+        UTF --> Presentation
+        ASCII --> Presentation
+        JPEG --> Presentation
+        MPEG --> Presentation
+        TIFF --> Presentation
+    end
+
+    subgraph Layer_7_Application
+        Application
+        FTP --> Application
+        HTTP --> Application
+        Telnet --> Application
+    end

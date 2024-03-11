@@ -1,0 +1,22 @@
+sequenceDiagram
+    participant Component1
+    participant Component2
+    participant MetadataService
+    participant Queue
+    participant Producer
+    participant Consumer
+    participant APIService
+
+    Component1->>+MetadataService: Request Information by ID
+    MetadataService->>+Component1: Provide Information
+    Component2->>+MetadataService: Request Information by ID
+    MetadataService->>+Component2: Provide Information
+    Component1->>+Queue: Produce Message with ID
+    Producer->>+Queue: Produce Message with ID
+    Consumer->>+MetadataService: Request HTML File by ID
+    MetadataService->>+Consumer: Provide HTML File
+    Producer->>+MetadataService: Write Data
+    Producer->>+Queue: Write Data
+    Producer->>+APIService: Make Requests
+    APIService->>+MetadataService: Make Requests
+    APIService->>+Queue: Make Requests

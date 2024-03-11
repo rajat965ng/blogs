@@ -1,0 +1,14 @@
+graph TD;
+    A[Company Develops Mobile App] -->|iOS App on App Store| B[iOS App];
+    A -->|Android App on Google Play| C[Android App];
+    A -->|Browser App with Same Features| D[Browser App];
+    A -->|Simple Page Directing to Mobile Apps| E[Download Page];
+    B -->|Variations include PC App| F[PC App];
+    C -->|Variations include PC App| G[PC App];
+    D -->|Variations include PC App| H[PC App];
+    E -->|Variations include PC App| I[PC App];
+    A -->|Exploring Questions| J[Exploration];
+    J -->|Separate web server application| K[Web Server];
+    J -->|Browser app requests to Node.js app| L[Node.js App];
+    K -->|Backend and Browser App| M[Backend & Browser App];
+    L -->|Backend shared with Mobile Apps| N[Shared Backend];

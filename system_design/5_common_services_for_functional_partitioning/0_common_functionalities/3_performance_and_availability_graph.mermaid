@@ -1,0 +1,10 @@
+graph TD;
+    A[API Gateway] -->|Improves performance and availability| B[Services];
+    B -->|Caching| C[Cache common requests];
+    C -->|Cache metadata from metadata service| D[Cache metadata];
+    C -->|Cache identity information| E[Cache identity];
+    B -->|Rate Limiting| F[Prevent overwhelming requests];
+    B -->|Request Dispatching| G[Make remote calls];
+    G -->|Create HTTP clients| H[HTTP Clients];
+    G -->|Ensure proper isolation| I[Isolation];
+    I -->|Implement bulkhead and circuit breaker patterns| J[Bulkhead & Circuit Breaker];

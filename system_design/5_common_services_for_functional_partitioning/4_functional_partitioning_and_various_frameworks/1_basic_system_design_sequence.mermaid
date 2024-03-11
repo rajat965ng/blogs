@@ -1,0 +1,25 @@
+sequenceDiagram
+    participant Company
+    participant MobileApp
+    participant BackendService
+    participant iOSApp
+    participant AndroidApp
+    participant BrowserApp
+    participant PCApp
+    participant WebServer
+    participant NodeJSApp
+
+    Company->>+MobileApp: Develop Mobile App
+    MobileApp->>+BackendService: Make Requests
+    Company->>+iOSApp: Publish on iOS App Store
+    Company->>+AndroidApp: Publish on Google Play Store
+    Company->>+BrowserApp: Develop Browser App
+    Company->>+PCApp: Develop PC App
+    Company->>+WebServer: Develop Web Server App
+    Company->>+NodeJSApp: Develop Node.js App
+    BrowserApp->>+NodeJSApp: Make Requests
+    NodeJSApp->>+BackendService: Make Requests
+    BackendService->>+AndroidApp: Serve Requests
+    BackendService->>+iOSApp: Serve Requests
+    BackendService->>+BrowserApp: Serve Requests
+    BackendService->>+PCApp: Serve Requests

@@ -1,0 +1,15 @@
+graph TD;
+    A[Disadvantages of API Gateway] -->|Additional latency| B[Routing through additional service];
+    A -->|Large cluster of hosts| C[Requires scaling];
+    C -->|Service host unavailable if sidecar is unavailable| D[Single host limitation];
+    D -->|Reason for not running multiple services on a single host| E[Service mesh design];
+    E -->|Consists of control plane and data plane| F[Service mesh components];
+    F -->|Observability plane described by Jenn Gile| G[Observability plane];
+    F -->|Control plane manages proxies and interfaces| H[Control plane];
+    H -->|Manage certificates and configurations| I[Certificate authority & access control];
+    H -->|Push configurations to proxy hosts| J[Proxy configurations];
+    G -->|Provides logging, monitoring, alerting, and auditing| K[Observability functionalities];
+    K -->|Logging, monitoring, alerting, auditing| L[Observability functionalities];
+    B -->|Latency reduction| M[Routing through sidecar];
+    M -->|Mesh traffic occurs between Envoy proxy hosts| N[Mesh traffic];
+    N -->|Uses various protocols including HTTP and gRPC| O[Communication protocols];
